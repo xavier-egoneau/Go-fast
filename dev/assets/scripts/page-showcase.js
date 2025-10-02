@@ -354,11 +354,25 @@ class UnifiedShowcase {
     const state = this.componentState;
     const componentId = this.currentItem.id;
 
-    // Pour le composant input, déclarer les variables une seule fois au début
+    // Déclarer les variables spécifiques selon le composant
     if (componentId === 'input') {
       script += `
       const inputEl = element.querySelector('input');
       const labelEl = element.querySelector('.input-group__label');
+      `;
+    } else if (componentId === 'card') {
+      script += `
+      const headerEl = element.querySelector('.card__header');
+      const footerEl = element.querySelector('.card__footer');
+      const titleEl = element.querySelector('.card__title');
+      let subtitleEl = element.querySelector('.card__subtitle');
+      const bodyEl = element.querySelector('.card__body');
+      `;
+    } else if (componentId === 'navbar') {
+      script += `
+      const searchEl = element.querySelector('[data-element="search"]');
+      const buttonEl = element.querySelector('[data-element="button"]');
+      const logoTextEl = element.querySelector('.navbar__logo-text');
       `;
     }
 
@@ -389,6 +403,54 @@ class UnifiedShowcase {
                 element.classList.add('input-group--error');
               } else {
                 element.classList.remove('input-group--error');
+              }
+              `;
+            }
+          } else if (componentId === 'card') {
+            if (key === 'hasHeader') {
+              script += `
+              if (headerEl) {
+                headerEl.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else if (key === 'hasFooter') {
+              script += `
+              if (footerEl) {
+                footerEl.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else {
+              // interactive, compact
+              const className = this.getClassNameForVariant(key);
+              script += `
+              if (${value}) {
+                element.classList.add('${className}');
+              } else {
+                element.classList.remove('${className}');
+              }
+              `;
+            }
+          } else if (componentId === 'navbar') {
+            if (key === 'withSearch') {
+              script += `
+              if (searchEl) {
+                searchEl.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else if (key === 'withButton') {
+              script += `
+              if (buttonEl) {
+                buttonEl.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else {
+              // sticky, shadow
+              const className = this.getClassNameForVariant(key);
+              script += `
+              if (${value}) {
+                element.classList.add('${className}');
+              } else {
+                element.classList.remove('${className}');
               }
               `;
             }
@@ -485,6 +547,35 @@ class UnifiedShowcase {
               }
               errorEl.textContent = '${this.escapeString(value)}';
             }
+            `;
+          }
+        } else if (componentId === 'card') {
+          if (key === 'title') {
+            script += `
+            if (titleEl) titleEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'subtitle') {
+            script += `
+            if (!subtitleEl && headerEl) {
+              subtitleEl = document.createElement('p');
+              subtitleEl.className = 'card__subtitle';
+              headerEl.appendChild(subtitleEl);
+            }
+            if (subtitleEl) subtitleEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'body') {
+            script += `
+            if (bodyEl) bodyEl.textContent = '${this.escapeString(value)}';
+            `;
+          }
+        } else if (componentId === 'navbar') {
+          if (key === 'logo') {
+            script += `
+            if (logoTextEl) logoTextEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'buttonText') {
+            script += `
+            if (buttonEl) buttonEl.textContent = '${this.escapeString(value)}';
             `;
           }
         } else {

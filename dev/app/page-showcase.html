@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Showcase - Design System</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <div class="page-showcase">
+    <!-- Boutons d'action fixes -->
+    <div class="page-showcase__actions">
+      <button class="page-showcase__action-btn" id="toggle-code-btn">
+        👁️ Voir le code
+      </button>
+      <button class="page-showcase__action-btn page-showcase__action-btn--primary" id="copy-code-btn">
+        📋 Copier le code
+      </button>
+    </div>
+
+    <div class="page-showcase__header">
+      <div class="container">
+        <a href="index.html" class="page-showcase__back">← Retour au showcase</a>
+        <h1 class="page-showcase__title" id="page-title">Chargement...</h1>
+        <div class="page-showcase__meta" id="page-meta"></div>
+
+        <div class="page-showcase__controls">
+          <!-- Device selector -->
+          <div class="page-showcase__device-selector">
+            <button class="page-showcase__device-btn active" data-device="mobile">
+              📱 Mobile
+            </button>
+            <button class="page-showcase__device-btn" data-device="tablet">
+              📱 Tablette
+            </button>
+            <button class="page-showcase__device-btn" data-device="desktop">
+              💻 Desktop
+            </button>
+          </div>
+
+          <!-- Variant selector -->
+          <div class="page-showcase__variant-selector">
+            <label for="variant-select">Variante:</label>
+            <select id="variant-select">
+              <option value="">Chargement...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Preview (rendu visuel) -->
+      <div class="page-showcase__preview page-showcase__preview--mobile" id="preview-container">
+        <iframe id="preview-iframe" class="page-showcase__iframe"></iframe>
+      </div>
+
+      <!-- Code view (HTML brut) -->
+      <div class="page-showcase__code-view" id="code-view">
+        <pre id="code-content"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/scripts/page-showcase.js"></script>
+</body>
+
+</html>

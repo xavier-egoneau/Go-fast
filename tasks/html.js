@@ -74,9 +74,10 @@ function compileComponents() {
     .pipe(dest('public/components'));
 }
 
-// Compiler tout (pages + composants)
+// Compiler tout (pages + composants + app)
 const { series } = require('gulp');
-const compileAll = series(compileComponents, compilePages);
+const copyAppFiles = require('./app.js');
+const compileAll = series(compileComponents, compilePages, copyAppFiles);
 
 // Export des tâches
 task('make:html', compileAll);

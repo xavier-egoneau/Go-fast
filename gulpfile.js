@@ -15,3 +15,4 @@ const scripts = require('./tasks/scripts.js');
 const watch = require('./tasks/watch.js');
 const assets = require('./tasks/assets.js');
 const showcase = require('./tasks/showcase.js');
+const app = require('./tasks/app.js');
