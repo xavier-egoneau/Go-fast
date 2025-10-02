@@ -1,0 +1,34 @@
+{
+  "name": "Portfolio",
+  "description": "Page portfolio avec navbar et grille de projets",
+  "category": "Exemple",
+  "variants": [
+    {
+      "id": "default",
+      "name": "3 colonnes",
+      "description": "Grille avec 3 colonnes de projets",
+      "data": {
+        "grid_columns": "3",
+        "navbar_variant": "default"
+      }
+    },
+    {
+      "id": "two-columns",
+      "name": "2 colonnes",
+      "description": "Grille avec 2 colonnes de projets",
+      "data": {
+        "grid_columns": "2",
+        "navbar_variant": "default"
+      }
+    },
+    {
+      "id": "dark",
+      "name": "Mode sombre",
+      "description": "Version avec navbar sombre",
+      "data": {
+        "grid_columns": "3",
+        "navbar_variant": "dark"
+      }
+    }
+  ]
+}

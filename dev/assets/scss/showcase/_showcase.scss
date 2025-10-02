@@ -107,194 +107,199 @@
     }
   }
 }
+// Page Showcase - Système unifié de prévisualisation pour composants et pages
+.page-showcase {
+  min-height: 100vh;
+  background: #f7fafc;
+  padding: 2rem 0;
+  padding-top:0;
 
-// Component showcase item
-.component-showcase {
-  background-color: $color-white;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-lg;
-  overflow: hidden;
-  transition: all $transition-base;
-  display: flex;
-  flex-direction: column;
-  
-  &:hover {
-    box-shadow: $shadow-xl;
-    transform: translateY(-4px);
-  }
-  
   &__header {
-    padding: $spacing-lg;
-    background: linear-gradient(135deg, $color-gray-50 0%, $color-white 100%);
-    border-bottom: 1px solid $color-gray-200;
-    
-    h3 {
-      font-size: $font-size-xl;
-      font-weight: $font-weight-semibold;
-      margin: 0 0 $spacing-xs 0;
-    }
-    
-    p {
-      font-size: $font-size-sm;
-      color: $color-gray-600;
-      margin: 0;
-    }
+    background: $color-white;
+    padding: 1.5rem 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  
-  &__preview {
-    padding: $spacing-xl;
-    min-height: 200px;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #1a202c;
+  }
+
+  &__meta {
+    font-size: 0.875rem;
+    color: #718096;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  &__device-selector {
+    display: flex;
+    gap: 0.5rem;
+    background: #e2e8f0;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+  }
+
+  &__device-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: #4a5568;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: $color-white;
-    position: relative;
-    flex: 1;
-    
-    // Permettre aux composants larges de prendre toute la largeur
-    > * {
+    gap: 0.25rem;
+
+    &:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    &.active {
+      background: $color-white;
+      color: #667eea;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+  }
+
+  &__variant-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #4a5568;
+    }
+
+    select {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+      background: $color-white;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__preview {
+    background: $color-white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    &--mobile {
+      max-width: 375px;
+    }
+
+    &--tablet {
+      max-width: 768px;
+    }
+
+    &--desktop {
       max-width: 100%;
     }
   }
-  
-  &__controls {
-    padding: $spacing-lg;
-    background-color: $color-gray-50;
-    border-top: 1px solid $color-gray-200;
-    
-    &-title {
-      font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
-      color: $color-gray-700;
-      margin-bottom: $spacing-md;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+
+  &__iframe {
+    width: 100%;
+    border: none;
+    display: block;
+    background: $color-white;
+    height: calc(100vh - 267px);
+    overflow: auto;
+  }
+
+  &__back {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+      text-decoration: underline;
     }
-    
-    &-group {
-      margin-bottom: $spacing-md;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-      
-      label {
-        display: block;
-        font-size: $font-size-sm;
-        font-weight: $font-weight-medium;
-        color: $color-gray-700;
-        margin-bottom: $spacing-xs;
-      }
-      
-      select,
-      input[type="text"],
-      input[type="number"] {
-        width: 100%;
-        padding: $spacing-sm;
-        font-size: $font-size-sm;
-        border: 1px solid $color-gray-300;
-        border-radius: $radius-md;
-        background-color: $color-white;
-        transition: border-color $transition-fast;
-        
-        &:focus {
-          outline: none;
-          border-color: $color-primary;
-        }
-      }
-      
-      input[type="checkbox"] {
-        margin-right: $spacing-sm;
+  }
+
+  // Boutons d'action fixes en haut à droite
+  &__actions {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1000;
+  }
+
+  &__action-btn {
+    padding: 0.75rem 1.5rem;
+    background: $color-white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1a202c;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+
+    &:hover {
+      background: #f7fafc;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
+
+    &--primary {
+      background: #667eea;
+      color: $color-white;
+      border-color: #667eea;
+
+      &:hover {
+        background: #5568d3;
       }
     }
   }
-  
-  &__code {
-    padding: $spacing-lg;
-    background-color: $color-gray-900;
-    border-top: 1px solid $color-gray-700;
-    
-    &-header {
-      @include flex-between;
-      margin-bottom: $spacing-md;
-      
-      h4 {
-        font-size: $font-size-sm;
-        font-weight: $font-weight-semibold;
-        color: $color-gray-300;
-        margin: 0;
-      }
-      
-      button {
-        @include button-reset;
-        padding: $spacing-xs $spacing-sm;
-        font-size: $font-size-xs;
-        color: $color-gray-300;
-        background-color: $color-gray-800;
-        border-radius: $radius-sm;
-        
-        &:hover {
-          background-color: $color-gray-700;
-          color: $color-white;
-        }
-      }
+
+  // Vue code HTML
+  &__code-view {
+    display: none;
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    overflow: auto;
+    height: calc(100vh - 207px);
+
+    &.active {
+      display: block;
     }
-    
+
     pre {
       margin: 0;
-      padding: $spacing-md;
-      background-color: $color-gray-800;
-      border-radius: $radius-md;
-      overflow-x: auto;
-      
-      code {
-        font-family: $font-family-mono;
-        font-size: $font-size-sm;
-        line-height: 1.6;
-        color: $color-gray-100;
-        background: none;
-        padding: 0;
-      }
-    }
-  }
-  
-  &__tabs {
-    display: flex;
-    gap: $spacing-sm;
-    padding: $spacing-md $spacing-lg 0;
-    background-color: $color-gray-50;
-    border-bottom: 1px solid $color-gray-200;
-    
-    button {
-      @include button-reset;
-      padding: $spacing-sm $spacing-md;
-      font-size: $font-size-sm;
-      font-weight: $font-weight-medium;
-      color: $color-gray-600;
-      border-bottom: 2px solid transparent;
-      transition: all $transition-fast;
-      
-      &:hover {
-        color: $color-gray-900;
-      }
-      
-      &.active {
-        color: $color-primary;
-        border-bottom-color: $color-primary;
-      }
-    }
-  }
-  
-  // Variante pour composants larges
-  &--full-width {
-    grid-column: 1 / -1;
-    
-    .component-showcase__preview {
-      justify-content: flex-start;
-      
-      > * {
-        width: 100%;
-      }
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   }
 }

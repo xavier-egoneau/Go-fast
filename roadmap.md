@@ -1,3 +1,1 @@
-- [x] isoler les composant et les pages du css du showcase + présenter les composants/pages dans une iframe (attention a la gestion de la hauteur de l'iframe auto ). donc génération de 2 css un pour le showcase et un pour le projet.
-- génération d'une premiere page avec ses variantes(json) pour test. sur le showcase on affichera pas directement le code pour les pages mais un lien vers une page showcase avec la page. On devra pouvoir tester en mobile/tabelette/desktop.
-- Supprimer l'index de la liste des pages listées sur le showcase( l'index.html c'est le showcase donc il faut faire une exeption)
+- [x] par default quand on arrive sur un composant/page il faudrait être sur le mode desktop

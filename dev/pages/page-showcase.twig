@@ -5,143 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Showcase - Design System</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    /* Styles spécifiques pour le showcase de page */
-    .page-showcase {
-      min-height: 100vh;
-      background: #f7fafc;
-      padding: 2rem 0;
-    }
-
-    .page-showcase__header {
-      background: white;
-      padding: 1.5rem 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .page-showcase__title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 0 0 0.5rem 0;
-      color: #1a202c;
-    }
-
-    .page-showcase__meta {
-      font-size: 0.875rem;
-      color: #718096;
-    }
-
-    .page-showcase__controls {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    .page-showcase__device-selector {
-      display: flex;
-      gap: 0.5rem;
-      background: #e2e8f0;
-      padding: 0.25rem;
-      border-radius: 0.5rem;
-    }
-
-    .page-showcase__device-btn {
-      padding: 0.5rem 1rem;
-      border: none;
-      background: transparent;
-      color: #4a5568;
-      cursor: pointer;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .page-showcase__device-btn:hover {
-      background: rgba(255,255,255,0.5);
-    }
-
-    .page-showcase__device-btn.active {
-      background: white;
-      color: #667eea;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .page-showcase__variant-selector {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .page-showcase__variant-selector label {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #4a5568;
-    }
-
-    .page-showcase__variant-selector select {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e2e8f0;
-      border-radius: 0.375rem;
-      background: white;
-      cursor: pointer;
-      font-size: 0.875rem;
-    }
-
-    .page-showcase__preview {
-      background: white;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin: 0 auto;
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
-
-    .page-showcase__preview--mobile {
-      max-width: 375px;
-    }
-
-    .page-showcase__preview--tablet {
-      max-width: 768px;
-    }
-
-    .page-showcase__preview--desktop {
-      max-width: 100%;
-    }
-
-    .page-showcase__iframe {
-      width: 100%;
-      border: none;
-      display: block;
-      background: white;
-      min-height: 600px;
-    }
-
-    .page-showcase__back {
-      color: #667eea;
-      text-decoration: none;
-      font-size: 0.875rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .page-showcase__back:hover {
-      text-decoration: underline;
-    }
-  </style>
 </head>
 <body>
   <div class="page-showcase">
+    <!-- Boutons d'action fixes -->
+    <div class="page-showcase__actions">
+      <button class="page-showcase__action-btn" id="toggle-code-btn">
+        👁️ Voir le code
+      </button>
+      <button class="page-showcase__action-btn page-showcase__action-btn--primary" id="copy-code-btn">
+        📋 Copier le code
+      </button>
+    </div>
+
     <div class="page-showcase__header">
       <div class="container">
         <a href="index.html" class="page-showcase__back">← Retour au showcase</a>
@@ -174,8 +50,14 @@
     </div>
 
     <div class="container">
+      <!-- Preview (rendu visuel) -->
       <div class="page-showcase__preview page-showcase__preview--mobile" id="preview-container">
         <iframe id="preview-iframe" class="page-showcase__iframe"></iframe>
+      </div>
+
+      <!-- Code view (HTML brut) -->
+      <div class="page-showcase__code-view" id="code-view">
+        <pre id="code-content"></pre>
       </div>
     </div>
   </div>

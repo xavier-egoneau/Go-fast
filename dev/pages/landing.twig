@@ -179,22 +179,6 @@
         const heroActions = document.querySelector('.hero__actions');
         if (heroActions) heroActions.style.display = 'none';
       }
-
-      // Notifier le parent (iframe) de la hauteur du contenu
-      function notifyHeight() {
-        if (window.parent !== window) {
-          const height = document.documentElement.scrollHeight;
-          window.parent.postMessage({ type: 'resize', height: height }, '*');
-        }
-      }
-
-      window.addEventListener('load', notifyHeight);
-      setTimeout(notifyHeight, 100);
-      // Observer les changements de taille
-      if (window.ResizeObserver) {
-        const resizeObserver = new ResizeObserver(notifyHeight);
-        resizeObserver.observe(document.body);
-      }
     })();
   </script>
 </body>
