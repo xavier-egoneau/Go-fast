@@ -1,15 +1,15 @@
 # Application Showcase - Fichiers système
 
-Ce dossier contient les fichiers HTML de l'application de showcase du Design System.
+Ce dossier contient les templates Twig de l'application de showcase du Design System.
 
-**⚠️ Ces fichiers sont gérés par le système et ne doivent pas être modifiés manuellement.**
+**⚠️ Ces fichiers font partie du système de showcase. Modifiez-les uniquement si vous voulez personnaliser l'interface du showcase.**
 
 ## Fichiers
 
-### `index.html`
+### `index.twig`
 Page d'accueil du showcase qui affiche tous les composants et pages du design system sous forme de grille de cartes.
 
-### `page-showcase.html`
+### `page-showcase.twig`
 Page de prévisualisation unifiée pour afficher :
 - Les composants avec leurs variants et contenus personnalisables
 - Les pages avec leurs différentes variantes
@@ -18,14 +18,14 @@ Page de prévisualisation unifiée pour afficher :
 
 ## Workflow
 
-Ces fichiers sont automatiquement copiés dans `public/` lors de la compilation :
+Ces fichiers Twig sont automatiquement compilés en HTML dans `public/` lors de la compilation :
 
 ```bash
-npx gulp make:html      # Compile pages, composants et copie les fichiers app
+npx gulp make:html      # Compile pages, composants et fichiers app
 npx gulp dev            # Mode développement avec watch
 ```
 
-Les modifications apportées aux fichiers dans `dev/app/` seront automatiquement détectées et copiées en mode `dev`.
+Les modifications apportées aux fichiers `.twig` dans `dev/app/` seront automatiquement détectées et recompilées en mode `dev`.
 
 ## Nettoyage
 

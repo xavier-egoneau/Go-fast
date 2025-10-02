@@ -7,7 +7,7 @@ const compileTwig = require('./html.js');
 const copyScripts = require('./scripts.js');
 const { copyImages, copyFonts, copyIcons } = require('./assets.js');
 const generateShowcaseData = require('./showcase.js');
-const copyAppFiles = require('./app.js');
+const compileAppFiles = require('./app.js');
 
 // Démarre le serveur BrowserSync
 function serve(done) {
@@ -44,8 +44,8 @@ function watchFiles() {
   watch('dev/components/**/*.json',
     series(generateShowcaseData, compileTwig, reload));
 
-  // Fichiers de l'app (index.html, page-showcase.html)
-  watch('dev/app/**/*.html', series(copyAppFiles, reload));
+  // Fichiers de l'app (index.twig, page-showcase.twig)
+  watch('dev/app/**/*.twig', series(compileAppFiles, reload));
 
   // Scripts
   watch('dev/assets/scripts/**/*.js', series(copyScripts, reload));

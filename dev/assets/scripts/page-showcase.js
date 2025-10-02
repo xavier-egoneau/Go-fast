@@ -330,7 +330,13 @@ class UnifiedShowcase {
   <link rel="stylesheet" href="/assets/css/style.css">
   <style>
     body {
-      margin: 2rem;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
       background: #f7fafc;
     }
   </style>
