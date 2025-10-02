@@ -1,0 +1,15 @@
+{# Button Component #}
+{% set size = size|default('normal') %}
+{% set variant = variant|default('primary') %}
+{% set style = style|default('solid') %}
+{% set disabled = disabled|default(false) %}
+{% set block = block|default(false) %}
+{% set text = text|default('Button') %}
+
+<button 
+  class="btn btn--{{ size }} btn--{{ variant }}{% if style != 'solid' %} btn--{{ style }}{% endif %}{% if block %} btn--block{% endif %}"
+  {% if disabled %}disabled{% endif %}
+  type="button"
+>
+  {{ text }}
+</button>

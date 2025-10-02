@@ -1,0 +1,50 @@
+{
+  "name": "Card",
+  "category": "Layout",
+  "description": "Carte flexible avec en-tête, corps et pied de page optionnels",
+  "variants": {
+    "variant": {
+      "label": "Variante",
+      "type": "select",
+      "default": "default",
+      "options": ["default", "outlined", "flat"]
+    },
+    "interactive": {
+      "label": "Interactive",
+      "type": "checkbox",
+      "default": false
+    },
+    "compact": {
+      "label": "Compact",
+      "type": "checkbox",
+      "default": false
+    },
+    "hasHeader": {
+      "label": "Afficher l'en-tête",
+      "type": "checkbox",
+      "default": true
+    },
+    "hasFooter": {
+      "label": "Afficher le pied de page",
+      "type": "checkbox",
+      "default": false
+    }
+  },
+  "content": {
+    "title": {
+      "label": "Titre",
+      "type": "text",
+      "default": "Titre de la carte"
+    },
+    "subtitle": {
+      "label": "Sous-titre",
+      "type": "text",
+      "default": "Sous-titre optionnel"
+    },
+    "body": {
+      "label": "Contenu",
+      "type": "textarea",
+      "default": "Ceci est le contenu principal de la carte. Vous pouvez y mettre du texte, des images ou tout autre élément."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{# Card Component #}
+{% set variant = variant|default('default') %}
+{% set interactive = interactive|default(false) %}
+{% set compact = compact|default(false) %}
+{% set hasHeader = hasHeader|default(true) %}
+{% set hasFooter = hasFooter|default(false) %}
+{% set title = title|default('Card Title') %}
+{% set subtitle = subtitle|default('') %}
+{% set body = body|default('Card content goes here.') %}
+
+<div class="card{% if variant != 'default' %} card--{{ variant }}{% endif %}{% if interactive %} card--interactive{% endif %}{% if compact %} card--compact{% endif %}">
+  {% if hasHeader %}
+  <div class="card__header">
+    <h3 class="card__title">{{ title }}</h3>
+    {% if subtitle %}
+    <p class="card__subtitle">{{ subtitle }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  <div class="card__body">
+    {{ body }}
+  </div>
+  
+  {% if hasFooter %}
+  <div class="card__footer">
+    <button class="btn btn--small btn--primary">Action</button>
+    <button class="btn btn--small btn--secondary">Annuler</button>
+  </div>
+  {% endif %}
+</div>

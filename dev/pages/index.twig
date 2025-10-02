@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Showcase</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="showcase">
+    <!-- Header -->
+    <header class="showcase__header">
+      <div class="container">
+        <div class="showcase__logo">
+          <h1>🎨 Design System</h1>
+        </div>
+        <nav class="showcase__nav">
+          <a href="#components" class="active">Composants</a>
+          <a href="#pages">Pages</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="showcase__main">
+      <div class="container">
+        <!-- Intro -->
+        <div class="showcase__intro">
+          <h2>Bienvenue dans votre Design System</h2>
+          <p>Explorez, testez et personnalisez tous vos composants en temps réel</p>
+        </div>
+
+        <!-- Components Section -->
+        <section class="showcase__section" id="components">
+          <h2 class="showcase__section-title">Composants</h2>
+          <div id="components-container" class="showcase__grid">
+            <div class="loading"></div>
+          </div>
+        </section>
+
+        <!-- Pages Section -->
+        <section class="showcase__section" id="pages">
+          <h2 class="showcase__section-title">Pages</h2>
+          <div id="pages-container" class="showcase__grid">
+            <div class="loading"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/scripts/showcase.js"></script>
+</body>
+</html>

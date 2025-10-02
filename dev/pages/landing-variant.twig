@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page - Design System</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Masquer les sections par défaut si elles sont contrôlées par JS */
+    .js-controlled {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="page-content">
+    <!-- Le contenu sera injecté ici par JavaScript -->
+  </div>
+
+  <script>
+    // Récupérer les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const heroVariant = urlParams.get('hero_variant') || 'primary';
+    const showFeatures = urlParams.get('show_features') !== 'false';
+    const showCta = urlParams.get('show_cta') !== 'false';
+
+    // Générer le contenu de la page selon les paramètres
+    const pageContent = document.getElementById('page-content');
+
+    // Navbar
+    const navbarClass = heroVariant === 'dark' ? 'dark' : 'default';
+    const navbarButtonClass = heroVariant === 'dark' ? 'primary' : 'secondary';
+
+    let html = `
+      <!-- Navbar -->
+      <nav class="navbar navbar--${navbarClass}">
+        <div class="container">
+          <div class="navbar__content">
+            <div class="navbar__brand">
+              <span class="navbar__logo">🎨 Design System</span>
+            </div>
+            <ul class="navbar__menu">
+              <li><a href="#features" class="navbar__link">Fonctionnalités</a></li>
+              <li><a href="#about" class="navbar__link">À propos</a></li>
+              <li><a href="#contact" class="navbar__link">Contact</a></li>
+            </ul>
+            <div class="navbar__actions">
+              <button class="btn btn--${navbarButtonClass} btn--small">
+                Se connecter
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero hero--${heroVariant}">
+        <div class="container">
+          <div class="hero__content">
+            <h1 class="hero__title">
+              ${heroVariant === 'minimal' ? 'Design System Simple' :
+                heroVariant === 'dark' ? 'Créez des Interfaces Exceptionnelles' :
+                'Bienvenue dans votre Design System'}
+            </h1>
+            <p class="hero__subtitle">
+              ${heroVariant === 'minimal' ?
+                'Des composants réutilisables pour vos projets.' :
+                'Un ensemble de composants modulaires et réutilisables pour construire vos applications rapidement et efficacement.'}
+            </p>
+            ${showCta ? `
+            <div class="hero__actions">
+              <button class="btn btn--primary btn--large">
+                Commencer
+              </button>
+              <button class="btn btn--outline btn--large">
+                En savoir plus
+              </button>
+            </div>
+            ` : ''}
+          </div>
+        </div>
+      </section>
+    `;
+
+    // Features Section
+    if (showFeatures) {
+      html += `
+      <section class="features" id="features">
+        <div class="container">
+          <h2 class="features__title">Nos Fonctionnalités</h2>
+          <p class="features__subtitle">Tout ce dont vous avez besoin pour construire de belles interfaces</p>
+
+          <div class="features__grid">
+            <div class="card">
+              <div class="card__header">
+                <h3 class="card__title">🎨 Composants Modulaires</h3>
+              </div>
+              <div class="card__body">
+                <p>Des composants réutilisables et personnalisables pour tous vos besoins.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <h3 class="card__title">⚡ Performance</h3>
+              </div>
+              <div class="card__body">
+                <p>Optimisé pour la vitesse et la légèreté, sans compromis sur les fonctionnalités.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <h3 class="card__title">📱 Responsive</h3>
+              </div>
+              <div class="card__body">
+                <p>Parfaitement adapté à tous les écrans, du mobile au desktop.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <h3 class="card__title">🔧 Personnalisable</h3>
+              </div>
+              <div class="card__body">
+                <p>Adaptez facilement les composants à votre charte graphique.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      `;
+    }
+
+    // CTA Section
+    if (showCta) {
+      html += `
+      <section class="cta">
+        <div class="container">
+          <div class="cta__content">
+            <h2 class="cta__title">Prêt à commencer ?</h2>
+            <p class="cta__subtitle">Rejoignez des milliers de développeurs qui utilisent notre Design System</p>
+            <button class="btn btn--primary btn--large">
+              Démarrer gratuitement
+            </button>
+          </div>
+        </div>
+      </section>
+      `;
+    }
+
+    // Footer
+    html += `
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2024 Design System. Tous droits réservés.</p>
+        </div>
+      </footer>
+    `;
+
+    pageContent.innerHTML = html;
+
+    // Notifier le parent (si dans une iframe) de la hauteur
+    function notifyHeight() {
+      if (window.parent !== window) {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ type: 'resize', height: height }, '*');
+      }
+    }
+
+    // Notifier après le chargement
+    window.addEventListener('load', notifyHeight);
+    // Et après un court délai pour s'assurer que tout est rendu
+    setTimeout(notifyHeight, 100);
+  </script>
+</body>
+</html>

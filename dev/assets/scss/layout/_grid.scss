@@ -1,0 +1,61 @@
+// Grid system
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.grid {
+  display: grid;
+  gap: $spacing-md;
+  
+  &--cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  &--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  &--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  &--gap-sm {
+    gap: $spacing-sm;
+  }
+  
+  &--gap-lg {
+    gap: $spacing-lg;
+  }
+  
+  &--gap-xl {
+    gap: $spacing-xl;
+  }
+}
+
+// Responsive grid
+@include respond-to('md') {
+  .grid--cols-md-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--cols-md-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--cols-md-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@include respond-to('lg') {
+  .grid--cols-lg-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--cols-lg-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

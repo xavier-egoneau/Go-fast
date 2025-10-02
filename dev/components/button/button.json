@@ -1,0 +1,42 @@
+{
+  "name": "Button",
+  "category": "Forms",
+  "description": "Bouton interactif avec différentes variantes de taille, couleur et style",
+  "variants": {
+    "size": {
+      "label": "Taille",
+      "type": "select",
+      "default": "normal",
+      "options": ["small", "normal", "large"]
+    },
+    "variant": {
+      "label": "Variante",
+      "type": "select",
+      "default": "primary",
+      "options": ["primary", "secondary", "success", "danger", "warning"]
+    },
+    "style": {
+      "label": "Style",
+      "type": "select",
+      "default": "solid",
+      "options": ["solid", "outline", "ghost"]
+    },
+    "disabled": {
+      "label": "Désactivé",
+      "type": "checkbox",
+      "default": false
+    },
+    "block": {
+      "label": "Pleine largeur",
+      "type": "checkbox",
+      "default": false
+    }
+  },
+  "content": {
+    "text": {
+      "label": "Texte du bouton",
+      "type": "text",
+      "default": "Cliquez ici"
+    }
+  }
+}

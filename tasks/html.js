@@ -1,0 +1,86 @@
+const { src, dest, task } = require('gulp');
+const twig = require('gulp-twig');
+const plumber = require('gulp-plumber');
+const beautify = require('gulp-jsbeautifier');
+const fs = require('fs');
+const path = require('path');
+
+// Fonction pour charger les données JSON des composants
+function loadComponentsData() {
+  const componentsDir = 'dev/components';
+  const components = {};
+  
+  if (!fs.existsSync(componentsDir)) {
+    return components;
+  }
+  
+  const folders = fs.readdirSync(componentsDir);
+  
+  folders.forEach(folder => {
+    const jsonPath = path.join(componentsDir, folder, `${folder}.json`);
+    if (fs.existsSync(jsonPath)) {
+      try {
+        components[folder] = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      } catch (e) {
+        console.error(`Erreur lors du chargement de ${jsonPath}:`, e.message);
+      }
+    }
+  });
+  
+  return components;
+}
+
+// Compile les pages Twig en HTML
+function compilePages() {
+  const componentsData = loadComponentsData();
+  
+  return src(['dev/pages/**/*.twig'])
+    .pipe(plumber())
+    .pipe(twig({
+      data: {
+        components: componentsData
+      }
+    }))
+    .pipe(beautify({
+      indent_size: 2,
+      indent_char: ' ',
+      max_preserve_newlines: 1,
+      preserve_newlines: true,
+      end_with_newline: true
+    }))
+    .pipe(dest('public'));
+}
+
+// Compile les composants individuels en HTML
+function compileComponents() {
+  const componentsDir = 'dev/components';
+  
+  if (!fs.existsSync(componentsDir)) {
+    return Promise.resolve();
+  }
+  
+  return src('dev/components/**/*.twig')
+    .pipe(plumber())
+    .pipe(twig({
+      data: {} // Les composants utilisent leurs propres données par défaut
+    }))
+    .pipe(beautify({
+      indent_size: 2,
+      indent_char: ' ',
+      max_preserve_newlines: 1,
+      preserve_newlines: true,
+      end_with_newline: true
+    }))
+    .pipe(dest('public/components'));
+}
+
+// Compiler tout (pages + composants)
+const { series } = require('gulp');
+const compileAll = series(compileComponents, compilePages);
+
+// Export des tâches
+task('make:html', compileAll);
+task('make:html:pages', compilePages);
+task('make:html:components', compileComponents);
+
+module.exports = compileAll;

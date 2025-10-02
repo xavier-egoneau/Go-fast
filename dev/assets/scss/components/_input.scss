@@ -1,0 +1,154 @@
+// Input component
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+  
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-gray-700;
+  }
+  
+  &__helper {
+    font-size: $font-size-xs;
+    color: $color-gray-500;
+  }
+  
+  &__error {
+    font-size: $font-size-xs;
+    color: $color-danger;
+  }
+  
+  &--error {
+    .input {
+      border-color: $color-danger;
+      
+      &:focus {
+        border-color: $color-danger;
+        box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+      }
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $color-gray-900;
+  background-color: $color-white;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  
+  &::placeholder {
+    color: $color-gray-400;
+  }
+  
+  &:hover:not(:disabled) {
+    border-color: $color-gray-400;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+  }
+  
+  &:disabled {
+    background-color: $color-gray-100;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  // Sizes
+  &--small {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+  
+  &--large {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+  
+  // Textarea
+  &--textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+}
+
+.select {
+  @extend .input;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-sm center;
+  padding-right: $spacing-xl;
+}
+
+.checkbox,
+.radio {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid $color-gray-300;
+  border-radius: $radius-sm;
+  background-color: $color-white;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover {
+    border-color: $color-primary;
+  }
+  
+  &:checked {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M10 3L4.5 8.5L2 6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  &:focus-visible {
+    @include focus-visible;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.radio {
+  border-radius: $radius-full;
+  
+  &:checked {
+    background-image: none;
+    box-shadow: inset 0 0 0 3px $color-white;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  
+  &__icon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-gray-400;
+    pointer-events: none;
+    
+    & + .input {
+      padding-left: $spacing-3xl;
+    }
+  }
+}

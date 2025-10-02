@@ -1,0 +1,17 @@
+// Style principal du Starter Kit Design System
+
+// Configuration (pas besoin d'importer ici, chaque fichier importe ce dont il a besoin)
+
+// Base
+@use 'base/reset';
+@use 'base/typography';
+
+// Layout
+@use 'layout/grid';
+@use 'layout/container';
+
+// Components
+@use 'components/index';
+
+// Showcase (page d'accueil)
+@use 'showcase/showcase';

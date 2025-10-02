@@ -1,0 +1,51 @@
+{
+  "name": "Input",
+  "category": "Forms",
+  "description": "Champ de saisie avec label, placeholder et états de validation",
+  "variants": {
+    "type": {
+      "label": "Type",
+      "type": "select",
+      "default": "text",
+      "options": ["text", "email", "password", "number", "tel", "url"]
+    },
+    "size": {
+      "label": "Taille",
+      "type": "select",
+      "default": "normal",
+      "options": ["small", "normal", "large"]
+    },
+    "disabled": {
+      "label": "Désactivé",
+      "type": "checkbox",
+      "default": false
+    },
+    "hasError": {
+      "label": "État d'erreur",
+      "type": "checkbox",
+      "default": false
+    }
+  },
+  "content": {
+    "label": {
+      "label": "Label",
+      "type": "text",
+      "default": "Nom d'utilisateur"
+    },
+    "placeholder": {
+      "label": "Placeholder",
+      "type": "text",
+      "default": "Entrez votre nom..."
+    },
+    "helper": {
+      "label": "Texte d'aide",
+      "type": "text",
+      "default": "Minimum 3 caractères"
+    },
+    "error": {
+      "label": "Message d'erreur",
+      "type": "text",
+      "default": "Ce champ est requis"
+    }
+  }
+}

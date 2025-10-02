@@ -1,0 +1,53 @@
+{# Navbar Component #}
+{% set variant = variant|default('default') %}
+{% set sticky = sticky|default(false) %}
+{% set shadow = shadow|default(true) %}
+{% set withSearch = withSearch|default(true) %}
+{% set withButton = withButton|default(true) %}
+{% set logo = logo|default('Mon Site') %}
+{% set buttonText = buttonText|default('Connexion') %}
+
+<nav class="navbar navbar--{{ variant }}{% if sticky %} navbar--sticky{% endif %}{% if shadow %} navbar--shadow{% endif %}">
+  <div class="navbar__container">
+    {# Logo #}
+    <div class="navbar__logo">
+      <a href="#" class="navbar__logo-link">
+        <svg class="navbar__logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="navbar__logo-text">{{ logo }}</span>
+      </a>
+    </div>
+
+    {# Navigation Links #}
+    <div class="navbar__menu">
+      <a href="#" class="navbar__link navbar__link--active">Accueil</a>
+      <a href="#" class="navbar__link">Produits</a>
+      <a href="#" class="navbar__link">Services</a>
+      <a href="#" class="navbar__link">À propos</a>
+      <a href="#" class="navbar__link">Contact</a>
+    </div>
+
+    {# Actions #}
+    <div class="navbar__actions">
+      <div class="navbar__search"{% if not withSearch %} style="display: none;"{% endif %} data-element="search">
+        <input type="search" class="navbar__search-input" placeholder="Rechercher...">
+        <svg class="navbar__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8" stroke-width="2"/>
+          <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <button class="navbar__button"{% if not withButton %} style="display: none;"{% endif %} data-element="button">
+        {{ buttonText }}
+      </button>
+
+      {# Mobile Menu Toggle #}
+      <button class="navbar__toggle" aria-label="Menu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>

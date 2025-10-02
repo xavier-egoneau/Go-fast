@@ -1,0 +1,97 @@
+// Card component
+@use '../base/variables' as *;
+
+.card {
+  background-color: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  transition: box-shadow $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+  
+  &__header {
+    padding: $spacing-lg;
+    border-bottom: 1px solid $color-gray-200;
+  }
+  
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-900;
+    margin: 0;
+  }
+  
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $color-gray-600;
+    margin-top: $spacing-xs;
+  }
+  
+  &__body {
+    padding: $spacing-lg;
+  }
+  
+  &__footer {
+    padding: $spacing-lg;
+    border-top: 1px solid $color-gray-200;
+    background-color: $color-gray-50;
+  }
+  
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  // Variants
+  &--outlined {
+    box-shadow: none;
+    border: 1px solid $color-gray-200;
+    
+    &:hover {
+      border-color: $color-gray-300;
+      box-shadow: $shadow-sm;
+    }
+  }
+  
+  &--flat {
+    box-shadow: none;
+    background-color: $color-gray-50;
+    
+    &:hover {
+      background-color: $color-gray-100;
+    }
+  }
+  
+  &--interactive {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-xl;
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  // Compact variant
+  &--compact {
+    .card__header,
+    .card__body,
+    .card__footer {
+      padding: $spacing-md;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Navbar",
+  "category": "Navigation",
+  "description": "Barre de navigation responsive avec logo, liens et actions",
+  "fullWidth": true,
+  "variants": {
+    "variant": {
+      "label": "Variante",
+      "type": "select",
+      "default": "default",
+      "options": ["default", "dark", "transparent"]
+    },
+    "sticky": {
+      "label": "Position fixe",
+      "type": "checkbox",
+      "default": false
+    },
+    "shadow": {
+      "label": "Ombre",
+      "type": "checkbox",
+      "default": true
+    },
+    "withSearch": {
+      "label": "Afficher la recherche",
+      "type": "checkbox",
+      "default": true
+    },
+    "withButton": {
+      "label": "Afficher le bouton CTA",
+      "type": "checkbox",
+      "default": true
+    }
+  },
+  "content": {
+    "logo": {
+      "label": "Texte du logo",
+      "type": "text",
+      "default": "Mon Site"
+    },
+    "buttonText": {
+      "label": "Texte du bouton",
+      "type": "text",
+      "default": "Connexion"
+    }
+  }
+}

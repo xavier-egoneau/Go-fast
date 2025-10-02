@@ -1,0 +1,41 @@
+// Container
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+  
+  @include respond-to('sm') {
+    max-width: $breakpoint-sm;
+  }
+  
+  @include respond-to('md') {
+    max-width: $breakpoint-md;
+  }
+  
+  @include respond-to('lg') {
+    max-width: $breakpoint-lg;
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+  
+  @include respond-to('xl') {
+    max-width: $breakpoint-xl;
+  }
+  
+  @include respond-to('2xl') {
+    max-width: $breakpoint-2xl;
+  }
+  
+  &--fluid {
+    max-width: 100%;
+  }
+  
+  &--narrow {
+    max-width: 960px;
+  }
+}

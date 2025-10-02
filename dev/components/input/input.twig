@@ -1,0 +1,26 @@
+{# Input Component #}
+{% set type = type|default('text') %}
+{% set size = size|default('normal') %}
+{% set disabled = disabled|default(false) %}
+{% set hasError = hasError|default(false) %}
+{% set label = label|default('Label') %}
+{% set placeholder = placeholder|default('') %}
+{% set helper = helper|default('') %}
+{% set error = error|default('This field is required') %}
+
+<div class="input-group{% if hasError %} input-group--error{% endif %}">
+  <label class="input-group__label">{{ label }}</label>
+  
+  <input 
+    type="{{ type }}" 
+    class="input{% if size != 'normal' %} input--{{ size }}{% endif %}"
+    placeholder="{{ placeholder }}"
+    {% if disabled %}disabled{% endif %}
+  />
+  
+  {% if hasError %}
+  <span class="input-group__error">{{ error }}</span>
+  {% elseif helper %}
+  <span class="input-group__helper">{{ helper }}</span>
+  {% endif %}
+</div>

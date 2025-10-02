@@ -1,0 +1,37 @@
+{
+  "name": "Landing Page",
+  "description": "Page d'accueil avec hero section et fonctionnalités",
+  "category": "Marketing",
+  "variants": [
+    {
+      "id": "default",
+      "name": "Défaut",
+      "description": "Version par défaut avec tous les éléments",
+      "data": {
+        "hero_variant": "primary",
+        "show_features": true,
+        "show_cta": true
+      }
+    },
+    {
+      "id": "minimal",
+      "name": "Minimal",
+      "description": "Version minimaliste sans section features",
+      "data": {
+        "hero_variant": "minimal",
+        "show_features": false,
+        "show_cta": true
+      }
+    },
+    {
+      "id": "dark",
+      "name": "Dark Mode",
+      "description": "Version avec thème sombre",
+      "data": {
+        "hero_variant": "dark",
+        "show_features": true,
+        "show_cta": true
+      }
+    }
+  ]
+}
