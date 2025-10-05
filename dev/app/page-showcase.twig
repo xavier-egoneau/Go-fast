@@ -26,16 +26,28 @@
         <h1 class="page-showcase__title" id="page-title">Chargement...</h1>
         <div class="page-showcase__meta" id="page-meta"></div>
 
+        <!-- Tests de qualité -->
+        <div class="page-showcase__quality-badges">
+          <div class="quality-badge" id="w3c-badge">
+            <span class="quality-badge__label">W3C:</span>
+            <span class="quality-badge__status">⏳ Test en cours...</span>
+          </div>
+          <div class="quality-badge" id="rgaa-badge">
+            <span class="quality-badge__label">RGAA:</span>
+            <span class="quality-badge__status">⏳ Test en cours...</span>
+          </div>
+        </div>
+
         <div class="page-showcase__controls">
           <!-- Device selector -->
           <div class="page-showcase__device-selector">
-            <button class="page-showcase__device-btn active" data-device="mobile">
+            <button class="page-showcase__device-btn" data-device="mobile">
               📱 Mobile
             </button>
             <button class="page-showcase__device-btn" data-device="tablet">
               📱 Tablette
             </button>
-            <button class="page-showcase__device-btn" data-device="desktop">
+            <button class="page-showcase__device-btn active" data-device="desktop">
               💻 Desktop
             </button>
           </div>
@@ -53,7 +65,7 @@
 
     <div class="container showcase_main_container">
       <!-- Preview (rendu visuel) -->
-      <div class="page-showcase__preview page-showcase__preview--mobile" id="preview-container">
+      <div class="page-showcase__preview page-showcase__preview--desktop" id="preview-container">
         <iframe id="preview-iframe" class="page-showcase__iframe"></iframe>
       </div>
 
@@ -64,6 +76,37 @@
     </div>
   </div>
 
+  <!-- Modale pour les détails des tests -->
+  <div class="quality-modal" id="quality-modal">
+    <div class="quality-modal__backdrop" id="modal-backdrop"></div>
+    <div class="quality-modal__content">
+      <div class="quality-modal__header">
+        <h2 class="quality-modal__title" id="modal-title">Détails des tests</h2>
+        <button class="quality-modal__close" id="modal-close" aria-label="Fermer">×</button>
+      </div>
+      <div class="quality-modal__body" id="modal-body">
+        <!-- Le contenu sera injecté dynamiquement -->
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/scripts/axe.min.js"></script>
+  <script src="assets/scripts/fr.json" type="application/json" id="axe-locale-fr"></script>
+  <script>
+    // Charger la locale française pour Axe-core
+    fetch('assets/scripts/fr.json')
+      .then(res => res.json())
+      .then(locale => {
+        window.__axeLocale = locale;
+        if (window.axe) {
+          axe.configure({ locale });
+        }
+      })
+      .catch(error => {
+        console.warn('Impossible de charger la locale Axe-core', error);
+      });
+  </script>
+  <script src="assets/scripts/quality-tests.js"></script>
   <script src="assets/scripts/page-showcase.js"></script>
 </body>
 

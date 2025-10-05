@@ -88,19 +88,27 @@
       gap: 0.5rem;
       flex-wrap: wrap;
     }
+
+    .skip-link:focus {
+      left: 0;
+      top: 0;
+    }
   </style>
 </head>
 <body>
   {% set navbar_variant = navbar_variant|default('default') %}
   {% set grid_columns = grid_columns|default('3') %}
 
+  <!-- Skip link pour accessibilité -->
+  <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; z-index: 999; padding: 1rem; background: #000; color: #fff; text-decoration: none;">Aller au contenu principal</a>
+
   <!-- Navbar -->
-  <nav class="navbar navbar--{{ navbar_variant }} navbar--shadow">
+  <nav class="navbar navbar--{{ navbar_variant }} navbar--shadow" role="navigation" aria-label="Navigation principale">
     <div class="navbar__container">
       {# Logo #}
       <div class="navbar__logo">
-        <a href="#" class="navbar__logo-link">
-          <svg class="navbar__logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <a href="#accueil" class="navbar__logo-link">
+          <svg class="navbar__logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="navbar__logo-text">Mon Portfolio</span>
@@ -109,28 +117,29 @@
 
       {# Navigation Links #}
       <div class="navbar__menu">
-        <a href="#" class="navbar__link navbar__link--active">Accueil</a>
-        <a href="#" class="navbar__link">Projets</a>
-        <a href="#" class="navbar__link">À propos</a>
-        <a href="#" class="navbar__link">Contact</a>
+        <a href="#accueil" class="navbar__link navbar__link--active" aria-current="page">Accueil</a>
+        <a href="#projets" class="navbar__link">Projets</a>
+        <a href="#a-propos" class="navbar__link">À propos</a>
+        <a href="#contact" class="navbar__link">Contact</a>
       </div>
 
       {# Actions #}
       <div class="navbar__actions">
         <div class="navbar__search" data-element="search">
-          <input type="search" class="navbar__search-input" placeholder="Rechercher...">
-          <svg class="navbar__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <label for="search-input" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">Rechercher</label>
+          <input type="search" id="search-input" class="navbar__search-input" placeholder="Rechercher..." aria-label="Rechercher dans le portfolio">
+          <svg class="navbar__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <circle cx="11" cy="11" r="8" stroke-width="2"/>
             <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
 
-        <button class="navbar__button" data-element="button">
+        <a href="#contact" class="navbar__button" data-element="button" role="button">
           Contact
-        </button>
+        </a>
 
         {# Mobile Menu Toggle #}
-        <button class="navbar__toggle" aria-label="Menu">
+        <button class="navbar__toggle" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
           <span class="navbar__toggle-bar"></span>
           <span class="navbar__toggle-bar"></span>
           <span class="navbar__toggle-bar"></span>
@@ -140,20 +149,23 @@
   </nav>
 
   <!-- Header -->
-  <div class="portfolio-header">
+  <header class="portfolio-header" id="accueil">
     <div class="container">
       <h1>Mes Projets</h1>
       <p>Découvrez mes dernières réalisations en design et développement</p>
     </div>
-  </div>
+  </header>
 
-  <!-- Projects Grid -->
-  <section class="container">
-    <div class="portfolio-grid portfolio-grid--{{ grid_columns }}">
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Projects Grid -->
+    <section class="container" id="projets" aria-labelledby="projets-title">
+      <h2 id="projets-title" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">Liste des projets</h2>
+      <div class="portfolio-grid portfolio-grid--{{ grid_columns }}">
 
       <!-- Projet 1 -->
-      <div class="card">
-        <div class="project-image">🎨</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône design - palette de peinture">🎨</div>
         <div class="card__header">
           <h3 class="card__title">Design System</h3>
           <p class="card__subtitle">Système de design modulaire</p>
@@ -162,14 +174,14 @@
           <p>Création d'un design system complet avec composants réutilisables et documentation interactive.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-design-system" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-design-system" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
       <!-- Projet 2 -->
-      <div class="card">
-        <div class="project-image">🌐</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône web - globe terrestre">🌐</div>
         <div class="card__header">
           <h3 class="card__title">Site E-commerce</h3>
           <p class="card__subtitle">Plateforme de vente en ligne</p>
@@ -178,14 +190,14 @@
           <p>Développement d'une boutique en ligne complète avec panier, paiement et gestion des commandes.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-ecommerce" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-ecommerce" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
       <!-- Projet 3 -->
-      <div class="card">
-        <div class="project-image">📱</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône mobile - smartphone">📱</div>
         <div class="card__header">
           <h3 class="card__title">App Mobile</h3>
           <p class="card__subtitle">Application de gestion de tâches</p>
@@ -194,14 +206,14 @@
           <p>Application mobile responsive pour organiser et suivre vos tâches quotidiennes avec synchronisation cloud.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-app-mobile" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-app-mobile" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
       <!-- Projet 4 -->
-      <div class="card">
-        <div class="project-image">📊</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône analytics - graphique statistique">📊</div>
         <div class="card__header">
           <h3 class="card__title">Dashboard Analytics</h3>
           <p class="card__subtitle">Tableau de bord de statistiques</p>
@@ -210,14 +222,14 @@
           <p>Interface de visualisation de données avec graphiques interactifs et exports personnalisables.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-dashboard" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-dashboard" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
       <!-- Projet 5 -->
-      <div class="card">
-        <div class="project-image">🎮</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône jeu - manette de jeu vidéo">🎮</div>
         <div class="card__header">
           <h3 class="card__title">Jeu Éducatif</h3>
           <p class="card__subtitle">Plateforme d'apprentissage interactive</p>
@@ -226,14 +238,14 @@
           <p>Jeu éducatif pour enfants avec système de progression, récompenses et suivi parental.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-jeu-educatif" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-jeu-educatif" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
       <!-- Projet 6 -->
-      <div class="card">
-        <div class="project-image">💬</div>
+      <article class="card">
+        <div class="project-image" role="img" aria-label="Icône messagerie - bulle de dialogue">💬</div>
         <div class="card__header">
           <h3 class="card__title">Chat en Temps Réel</h3>
           <p class="card__subtitle">Messagerie instantanée</p>
@@ -242,16 +254,17 @@
           <p>Application de messagerie avec chat en temps réel, partage de fichiers et appels vidéo.</p>
         </div>
         <div class="card__footer">
-          <button class="btn btn--primary btn--small">Voir le projet</button>
-          <button class="btn btn--outline btn--small">Code source</button>
+          <a href="#projet-chat" class="btn btn--primary btn--small">Voir le projet</a>
+          <a href="#code-chat" class="btn btn--outline btn--small">Code source</a>
         </div>
-      </div>
+      </article>
 
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="footer" style="margin-top: 3rem;">
+  <footer class="footer" role="contentinfo" id="contact" style="margin-top: 3rem;">
     <div class="container">
       <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
     </div>

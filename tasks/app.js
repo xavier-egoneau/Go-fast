@@ -1,7 +1,7 @@
-const { src, dest, task } = require('gulp');
-const twig = require('gulp-twig');
-const plumber = require('gulp-plumber');
-const beautify = require('gulp-jsbeautifier');
+import { src, dest, task } from 'gulp';
+import twig from 'gulp-twig';
+import plumber from 'gulp-plumber';
+import beautify from 'gulp-jsbeautifier';
 
 // Compiler les fichiers Twig de l'application showcase
 function compileAppFiles() {
@@ -23,4 +23,4 @@ function compileAppFiles() {
 // Export des tâches
 task('compileAppFiles', compileAppFiles);
 
-module.exports = compileAppFiles;
+export default compileAppFiles;

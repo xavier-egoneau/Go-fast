@@ -1,6 +1,10 @@
-const { task } = require('gulp');
-const fs = require('fs');
-const path = require('path');
+import { task } from 'gulp';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Génère automatiquement un fichier _index.scss pour les composants
 function generateScssIndex(done) {
@@ -39,4 +43,4 @@ function generateScssIndex(done) {
 // Export des tâches
 task('generate:scss-index', generateScssIndex);
 
-module.exports = generateScssIndex;
+export default generateScssIndex;

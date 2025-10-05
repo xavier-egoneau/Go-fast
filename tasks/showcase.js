@@ -1,6 +1,6 @@
-const { task } = require('gulp');
-const fs = require('fs');
-const path = require('path');
+import { task } from 'gulp';
+import fs from 'fs';
+import path from 'path';
 
 // Génère le fichier JSON listant tous les composants et pages
 function generateShowcaseData() {
@@ -104,4 +104,4 @@ function generateShowcaseData() {
 // Export des tâches
 task('generate:showcase', generateShowcaseData);
 
-module.exports = generateShowcaseData;
+export default generateShowcaseData;

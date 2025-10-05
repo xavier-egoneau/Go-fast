@@ -1,17 +1,22 @@
 {
   "name": "starter-kit-design-system",
   "version": "1.0.0",
+  "type": "module",
   "description": "Starter kit d'intégration HTML avec showcase de composants dynamique",
   "main": "gulpfile.js",
   "scripts": {
     "postinstall": "node scripts/welcome.js || true",
     "dev": "gulp dev",
     "build": "gulp",
+    "mcp": "node mcp-server.js",
     "clean": "gulp clean"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.19.1",
+    "@types/node": "^24.6.2",
+    "axe-core": "^4.10.3",
     "del": "^6.0.0",
     "event-stream": "^4.0.1",
     "gulp-concat": "^2.6.1",
@@ -20,7 +25,8 @@
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-twig": "^1.2.0",
-    "gulp4-run-sequence": "^1.0.1"
+    "gulp4-run-sequence": "^1.0.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "ansi-colors": "^4.1.3",

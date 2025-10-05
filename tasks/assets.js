@@ -1,5 +1,5 @@
-const { src, dest, task } = require('gulp');
-const plumber = require('gulp-plumber');
+import { src, dest, task } from 'gulp';
+import plumber from 'gulp-plumber';
 
 // Copie les images
 function copyImages() {
@@ -27,8 +27,5 @@ task('copy:images', copyImages);
 task('copy:fonts', copyFonts);
 task('copy:icons', copyIcons);
 
-module.exports = {
-  copyImages,
-  copyFonts,
-  copyIcons
-};
+export { copyImages, copyFonts, copyIcons };
+export default { copyImages, copyFonts, copyIcons };

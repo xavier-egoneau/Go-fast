@@ -1,9 +1,10 @@
-const { src, dest, task, series } = require('gulp');
-const sassCompiler = require('sass');
-const sass = require('gulp-sass')(sassCompiler);
-const sourcemaps = require('gulp-sourcemaps');
-const plumber = require('gulp-plumber');
-const generateScssIndex = require('./generate-scss-index.js');
+import { src, dest, task, series } from 'gulp';
+import * as sassCompiler from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(sassCompiler);
+import sourcemaps from 'gulp-sourcemaps';
+import plumber from 'gulp-plumber';
+import generateScssIndex from './generate-scss-index.js';
 
 // Compile SCSS en CSS
 function compileScss() {
@@ -21,4 +22,4 @@ function compileScss() {
 // Export des tâches
 task('make:css', series(generateScssIndex, compileScss));
 
-module.exports = series(generateScssIndex, compileScss);
+export default series(generateScssIndex, compileScss);

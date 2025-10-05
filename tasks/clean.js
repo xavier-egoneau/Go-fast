@@ -1,5 +1,5 @@
-const { task } = require('gulp');
-const del = require('del');
+import { task } from 'gulp';
+import del from 'del';
 
 // Nettoie le dossier public en préservant le dossier data (généré par le système)
 function cleanPublic() {
@@ -14,4 +14,4 @@ function cleanPublic() {
 // Export des tâches
 task('clean', cleanPublic);
 
-module.exports = cleanPublic;
+export default cleanPublic;

@@ -1,9 +1,9 @@
-const { src, dest, task } = require('gulp');
-const plumber = require('gulp-plumber');
+import { src, dest, task } from 'gulp';
+import plumber from 'gulp-plumber';
 
-// Copie les scripts JS
+// Copie les scripts JS et JSON
 function copyScripts() {
-  return src('dev/assets/scripts/**/*.js')
+  return src('dev/assets/scripts/**/*.{js,json}')
     .pipe(plumber())
     .pipe(dest('public/assets/scripts'));
 }
@@ -11,4 +11,4 @@ function copyScripts() {
 // Export des tâches
 task('copy:js', copyScripts);
 
-module.exports = copyScripts;
+export default copyScripts;

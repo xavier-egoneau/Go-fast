@@ -1,17 +1,18 @@
-const { watch, series, parallel, task } = require('gulp');
-const browserSync = require('browser-sync').create();
+import { watch, series, parallel, task } from 'gulp';
+import browserSync from 'browser-sync';
+const bs = browserSync.create();
 
 // Import des autres tâches
-const compileScss = require('./css.js');
-const compileTwig = require('./html.js');
-const copyScripts = require('./scripts.js');
-const { copyImages, copyFonts, copyIcons } = require('./assets.js');
-const generateShowcaseData = require('./showcase.js');
-const compileAppFiles = require('./app.js');
+import compileScss from './css.js';
+import compileTwig from './html.js';
+import copyScripts from './scripts.js';
+import { copyImages, copyFonts, copyIcons } from './assets.js';
+import generateShowcaseData from './showcase.js';
+import compileAppFiles from './app.js';
 
 // Démarre le serveur BrowserSync
 function serve(done) {
-  browserSync.init({
+  bs.init({
     server: {
       baseDir: ['./public', './'],  // Servir public ET la racine (pour accéder à dev/)
       routes: {
@@ -27,7 +28,7 @@ function serve(done) {
 
 // Recharge le navigateur
 function reload(done) {
-  browserSync.reload();
+  bs.reload();
   done();
 }
 
@@ -70,4 +71,5 @@ task('serve', serve);
 task('watch', watchFiles);
 task('dev', dev);
 
-module.exports = { serve, watchFiles, dev };
+export { serve, watchFiles, dev };
+export default { serve, watchFiles, dev };

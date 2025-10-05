@@ -1,9 +1,10 @@
-const { src, dest, task } = require('gulp');
-const twig = require('gulp-twig');
-const plumber = require('gulp-plumber');
-const beautify = require('gulp-jsbeautifier');
-const fs = require('fs');
-const path = require('path');
+import { src, dest, task, series } from 'gulp';
+import twig from 'gulp-twig';
+import plumber from 'gulp-plumber';
+import beautify from 'gulp-jsbeautifier';
+import fs from 'fs';
+import path from 'path';
+import compileAppFiles from './app.js';
 
 // Fonction pour charger les données JSON des composants
 function loadComponentsData() {
@@ -75,8 +76,6 @@ function compileComponents() {
 }
 
 // Compiler tout (pages + composants + app)
-const { series } = require('gulp');
-const compileAppFiles = require('./app.js');
 const compileAll = series(compileComponents, compilePages, compileAppFiles);
 
 // Export des tâches
@@ -84,4 +83,4 @@ task('make:html', compileAll);
 task('make:html:pages', compilePages);
 task('make:html:components', compileComponents);
 
-module.exports = compileAll;
+export default compileAll;

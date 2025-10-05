@@ -4,7 +4,7 @@ class UnifiedShowcase {
   constructor() {
     this.currentItem = null; // Page ou composant en cours d'affichage
     this.currentVariant = null; // Variante actuelle (pour les pages)
-    this.currentDevice = 'mobile'; // Device actuel (mobile/tablet/desktop)
+    this.currentDevice = 'desktop'; // Device actuel (mobile/tablet/desktop)
     this.showcaseData = null; // Données chargées depuis showcase.json
     this.type = null; // Type d'élément : 'page' ou 'component'
     this.componentState = null; // État actuel du composant (variants + content)
@@ -292,6 +292,19 @@ class UnifiedShowcase {
     } else {
       // Pour les pages, charger directement la page HTML
       this.loadPage(iframe);
+    }
+
+    // Lancer les tests de qualité après le chargement
+    this.runQualityTests(iframe);
+  }
+
+  /**
+   * Lance les tests de qualité (W3C & RGAA)
+   */
+  async runQualityTests(iframe) {
+    if (window.QualityTests) {
+      const qualityTests = new window.QualityTests();
+      await qualityTests.runAllTests(iframe);
     }
   }
 

@@ -143,6 +143,13 @@
     color: #718096;
   }
 
+  &__quality-badges {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   &__controls {
     display: flex;
     gap: 1rem;
@@ -332,6 +339,298 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Quality badges (W3C & RGAA)
+.quality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: $color-white;
+  border-radius: 0.5rem;
+  border: 1px solid $color-gray-200;
+  font-size: 0.875rem;
+
+  &__label {
+    font-weight: $font-weight-semibold;
+    color: $color-gray-700;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: $font-weight-medium;
+  }
+
+  &--success {
+    border-color: $color-success-light;
+    background: rgba($color-success, 0.05);
+
+    .quality-badge__status {
+      color: $color-success-dark;
+    }
+  }
+
+  &--warning {
+    border-color: $color-warning-light;
+    background: rgba($color-warning, 0.05);
+
+    .quality-badge__status {
+      color: $color-warning-dark;
+    }
+  }
+
+  &--error {
+    border-color: $color-danger-light;
+    background: rgba($color-danger, 0.05);
+
+    .quality-badge__status {
+      color: $color-danger-dark;
+    }
+  }
+
+  &--loading {
+    .quality-badge__status {
+      color: $color-gray-500;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+
+  // Rendre les badges cliquables
+  cursor: pointer;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Modale des détails de tests
+.quality-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $z-modal;
+
+  &.active {
+    display: block;
+  }
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin: 0;
+    color: $color-gray-900;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: $font-size-3xl;
+    line-height: 1;
+    cursor: pointer;
+    color: $color-gray-500;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-gray-100;
+      color: $color-gray-900;
+    }
+  }
+
+  &__body {
+    padding: $spacing-lg;
+    overflow-y: auto;
+    flex: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Styles pour le contenu de la modale
+.test-result {
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: $color-gray-50;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-lg;
+
+    &-icon {
+      font-size: $font-size-3xl;
+    }
+
+    &-text {
+      flex: 1;
+
+      h3 {
+        margin: 0 0 $spacing-xs 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+      }
+
+      p {
+        margin: 0;
+        color: $color-gray-600;
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    padding: $spacing-md;
+    border: 1px solid $color-gray-200;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-md;
+
+    &--error {
+      border-left: 4px solid $color-danger;
+      background: rgba($color-danger, 0.03);
+    }
+
+    &--warning {
+      border-left: 4px solid $color-warning;
+      background: rgba($color-warning, 0.03);
+    }
+
+    &--info {
+      border-left: 4px solid $color-primary;
+      background: rgba($color-primary, 0.03);
+    }
+  }
+
+  &__item-header {
+    display: flex;
+    align-items: start;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__item-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__item-title {
+    flex: 1;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-900;
+    margin: 0;
+    font-size: $font-size-base;
+  }
+
+  &__item-description {
+    margin: 0 0 $spacing-sm 0;
+    color: $color-gray-700;
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+  }
+
+  &__item-location {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-xs;
+    color: $color-gray-500;
+    font-family: $font-family-mono;
+    background: $color-gray-100;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    width: fit-content;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-3xl;
+    color: $color-gray-500;
+
+    &-icon {
+      font-size: 3rem;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-base;
+    }
   }
 }
 
