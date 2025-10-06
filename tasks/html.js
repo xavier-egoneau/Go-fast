@@ -34,7 +34,7 @@ function loadComponentsData() {
 // Compile les pages Twig en HTML
 function compilePages() {
   const componentsData = loadComponentsData();
-  
+
   return src(['dev/pages/**/*.twig'])
     .pipe(plumber())
     .pipe(twig({
@@ -49,7 +49,7 @@ function compilePages() {
       preserve_newlines: true,
       end_with_newline: true
     }))
-    .pipe(dest('public'));
+    .pipe(dest('public/pages'));
 }
 
 // Compile les composants individuels en HTML

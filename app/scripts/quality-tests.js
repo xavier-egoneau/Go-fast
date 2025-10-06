@@ -334,7 +334,17 @@ ${result.html}
 
   getAxeScriptSrc() {
     const script = document.querySelector("script[src*='axe']");
-    return script ? script.getAttribute("src") : null;
+    if (script) {
+      let src = script.getAttribute("src");
+      // Si le src est relatif et qu'on est dans une iframe dans un sous-dossier,
+      // convertir en chemin absolu depuis la racine
+      if (src && !src.startsWith('http') && !src.startsWith('/')) {
+        // Convertir en chemin absolu
+        src = '/' + src.replace('../', '');
+      }
+      return src;
+    }
+    return null;
   }
 
   async ensureIframeAxe() {

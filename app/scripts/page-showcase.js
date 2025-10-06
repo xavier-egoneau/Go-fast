@@ -762,7 +762,7 @@ class UnifiedShowcase {
 
   loadPage(iframe) {
     // Construire l'URL avec les paramètres de variante si nécessaire
-    let pageUrl = `${this.currentItem.path}.html`;
+    let pageUrl = `pages/${this.currentItem.path}.html`;
 
     if (this.currentVariant && this.currentVariant.data) {
       const params = new URLSearchParams(this.currentVariant.data);
