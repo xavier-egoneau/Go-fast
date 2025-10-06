@@ -393,6 +393,18 @@ class UnifiedShowcase {
       const buttonEl = element.querySelector('[data-element="button"]');
       const logoTextEl = element.querySelector('.navbar__logo-text');
       `;
+    } else if (componentId === 'modal') {
+      script += `
+      // Pour le modal, on doit cibler le .modal-container car le premier élément est le bouton
+      const modalContainer = container.querySelector('.modal-container');
+      const modalEl = modalContainer.querySelector('.modal');
+      const backdropEl = modalContainer.querySelector('.modal__backdrop');
+      const headerEl = modalEl.querySelector('.modal__header');
+      const footerEl = modalEl.querySelector('.modal__footer');
+      const titleEl = modalEl.querySelector('.modal__title');
+      const bodyEl = modalEl.querySelector('.modal__body');
+      const closeBtn = modalEl.querySelector('.modal__close');
+      `;
     }
 
     // Appliquer les variantes selon le type de composant
@@ -473,6 +485,37 @@ class UnifiedShowcase {
               }
               `;
             }
+          } else if (componentId === 'modal') {
+            // Gestion spécifique pour le modal
+            if (key === 'centered') {
+              script += `
+              if (${value}) {
+                modalEl.classList.add('modal--centered');
+              } else {
+                modalEl.classList.remove('modal--centered');
+              }
+              `;
+            } else if (key === 'closable') {
+              script += `
+              if (closeBtn) {
+                closeBtn.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else if (key === 'hasFooter') {
+              script += `
+              if (footerEl) {
+                footerEl.style.display = ${value} ? '' : 'none';
+              }
+              `;
+            } else if (key === 'closeOnBackdrop') {
+              script += `
+              if (${value}) {
+                backdropEl.classList.add('modal__backdrop--clickable');
+              } else {
+                backdropEl.classList.remove('modal__backdrop--clickable');
+              }
+              `;
+            }
           } else {
             // Comportement par défaut pour les autres composants
             const className = this.getClassNameForVariant(key);
@@ -512,6 +555,31 @@ class UnifiedShowcase {
                 if ('${value}' !== 'normal') {
                   inputEl.classList.add('input--${value}');
                 }
+              }
+              `;
+            }
+          } else if (componentId === 'modal') {
+            // Gestion spécifique pour le modal
+            if (key === 'size') {
+              script += `
+              ${config.options.map(opt => `modalEl.classList.remove('modal--${opt}');`).join('\n')}
+              modalEl.classList.add('modal--${value}');
+              `;
+            } else if (key === 'variant') {
+              script += `
+              ${config.options.map(opt => `modalEl.classList.remove('modal--${opt}');`).join('\n')}
+              modalEl.classList.add('modal--${value}');
+              `;
+            } else if (key === 'backdrop') {
+              script += `
+              ${config.options.map(opt => `backdropEl.classList.remove('modal__backdrop--${opt}');`).join('\n')}
+              backdropEl.classList.add('modal__backdrop--${value}');
+              `;
+            } else if (key === 'animation') {
+              script += `
+              ${config.options.map(opt => `modalEl.classList.remove('modal--animation-${opt}');`).join('\n')}
+              if ('${value}' !== 'none') {
+                modalEl.classList.add('modal--animation-${value}');
               }
               `;
             }
@@ -597,6 +665,40 @@ class UnifiedShowcase {
             if (buttonEl) buttonEl.textContent = '${this.escapeString(value)}';
             `;
           }
+        } else if (componentId === 'modal') {
+          if (key === 'title') {
+            script += `
+            if (titleEl) titleEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'body') {
+            script += `
+            if (bodyEl) bodyEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'closeText') {
+            script += `
+            const closeTextBtn = footerEl ? footerEl.querySelector('.modal__button--secondary') : null;
+            if (closeTextBtn) closeTextBtn.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'actionText') {
+            script += `
+            const actionBtn = footerEl ? footerEl.querySelectorAll('.modal__button')[1] : null;
+            if (actionBtn) actionBtn.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'icon') {
+            script += `
+            let iconEl = headerEl.querySelector('.modal__icon');
+            if ('${this.escapeString(value)}' && !iconEl) {
+              iconEl = document.createElement('div');
+              iconEl.className = 'modal__icon modal__icon--default';
+              headerEl.insertBefore(iconEl, titleEl);
+            }
+            if (iconEl && '${this.escapeString(value)}') {
+              iconEl.innerHTML = '${this.escapeString(value)}';
+            } else if (iconEl && !'${this.escapeString(value)}') {
+              iconEl.remove();
+            }
+            `;
+          }
         } else {
           // Comportement par défaut : recherche et remplacement de texte
           script += `
@@ -621,6 +723,19 @@ class UnifiedShowcase {
       });
     }
 
+    // Pour le modal, ajouter un script pour l'ouvrir automatiquement dans le showcase
+    if (this.currentItem.id === 'modal') {
+      script += `
+      // Ouvrir automatiquement le modal pour le showcase
+      if (modalContainer) {
+        setTimeout(() => {
+          modalContainer.classList.add('modal-container--active');
+          document.body.style.overflow = 'hidden';
+        }, 100);
+      }
+      `;
+    }
+
     return script;
   }
 
@@ -629,7 +744,8 @@ class UnifiedShowcase {
       'button': 'btn',
       'card': 'card',
       'input': 'input',
-      'navbar': 'navbar'
+      'navbar': 'navbar',
+      'modal': 'modal'
     };
     return mapping[this.currentItem.id] || this.currentItem.id;
   }
@@ -825,3 +941,4 @@ if (document.readyState === 'loading') {
 } else {
   new UnifiedShowcase();
 }
+

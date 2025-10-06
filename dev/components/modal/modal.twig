@@ -1,0 +1,81 @@
+{% set modalId = 'modal-' ~ random() %}
+{% set size = size|default('normal') %}
+{% set variant = variant|default('default') %}
+{% set centered = centered|default(true) %}
+{% set closable = closable|default(true) %}
+{% set hasFooter = hasFooter|default(true) %}
+{% set backdrop = backdrop|default('dark') %}
+{% set animation = animation|default('fade-scale') %}
+{% set closeOnBackdrop = closeOnBackdrop|default(true) %}
+
+{# Contenu #}
+{% set title = title|default('Titre de la modale') %}
+{% set body = body|default('Ceci est le contenu de la modale. Vous pouvez y placer du texte, des formulaires ou tout autre élément.') %}
+{% set closeText = closeText|default('Annuler') %}
+{% set actionText = actionText|default('Confirmer') %}
+{% set icon = icon|default('') %}
+
+{# Classes #}
+{% set modalClasses = [
+  'modal',
+  'modal--' ~ size,
+  'modal--' ~ variant,
+  animation != 'none' ? 'modal--animation-' ~ animation : '',
+  centered ? 'modal--centered' : ''
+] %}
+
+{% set backdropClasses = [
+  'modal__backdrop',
+  'modal__backdrop--' ~ backdrop,
+  closeOnBackdrop ? 'modal__backdrop--clickable' : ''
+] %}
+
+{# Bouton pour ouvrir la modale (démo) #}
+<button onclick="document.getElementById('{{ modalId }}').classList.add('modal-container--active'); document.body.style.overflow='hidden';" style="padding: 0.75rem 1.5rem; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500;">
+  Ouvrir la modale
+</button>
+
+{# Container de la modale #}
+<div class="modal-container" id="{{ modalId }}">
+  {# Backdrop / Overlay #}
+  <div class="{{ backdropClasses|join(' ') }}" onclick="{% if closeOnBackdrop %}this.parentElement.classList.remove('modal-container--active'); document.body.style.overflow=''{% endif %}"></div>
+
+  {# Modale #}
+  <div class="{{ modalClasses|join(' ') }}" role="dialog" aria-modal="true" aria-labelledby="{{ modalId }}-title">
+    <div class="modal__dialog">
+      {# En-tête #}
+      <div class="modal__header">
+        {% if icon %}
+          <div class="modal__icon modal__icon--{{ variant }}">
+            {{ icon|raw }}
+          </div>
+        {% endif %}
+        <h2 class="modal__title" id="{{ modalId }}-title">{{ title }}</h2>
+        {% if closable %}
+          <button class="modal__close" onclick="document.getElementById('{{ modalId }}').classList.remove('modal-container--active'); document.body.style.overflow='';" aria-label="Fermer la modale">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        {% endif %}
+      </div>
+
+      {# Corps #}
+      <div class="modal__body">
+        {{ body|raw }}
+      </div>
+
+      {# Pied de page #}
+      {% if hasFooter %}
+        <div class="modal__footer">
+          <button class="modal__button modal__button--secondary" onclick="document.getElementById('{{ modalId }}').classList.remove('modal-container--active'); document.body.style.overflow='';">
+            {{ closeText }}
+          </button>
+          <button class="modal__button modal__button--{{ variant }}">
+            {{ actionText }}
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

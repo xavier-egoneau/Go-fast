@@ -1,0 +1,103 @@
+{
+  "id": "modal",
+  "path": "components/modal/modal",
+  "name": "Modal",
+  "category": "UI Elements",
+  "description": "Fenêtre modale avec overlay, animations et multiples variantes de taille et de style",
+  "variants": {
+    "size": {
+      "label": "Taille",
+      "type": "select",
+      "default": "normal",
+      "options": [
+        "small",
+        "normal",
+        "large",
+        "fullscreen"
+      ]
+    },
+    "variant": {
+      "label": "Variante",
+      "type": "select",
+      "default": "default",
+      "options": [
+        "default",
+        "primary",
+        "success",
+        "danger",
+        "warning",
+        "info"
+      ]
+    },
+    "centered": {
+      "label": "Centré verticalement",
+      "type": "checkbox",
+      "default": true
+    },
+    "closable": {
+      "label": "Bouton de fermeture",
+      "type": "checkbox",
+      "default": true
+    },
+    "hasFooter": {
+      "label": "Afficher le pied de page",
+      "type": "checkbox",
+      "default": true
+    },
+    "backdrop": {
+      "label": "Type de fond",
+      "type": "select",
+      "default": "dark",
+      "options": [
+        "dark",
+        "light",
+        "blur",
+        "none"
+      ]
+    },
+    "animation": {
+      "label": "Animation",
+      "type": "select",
+      "default": "fade-scale",
+      "options": [
+        "fade",
+        "fade-scale",
+        "slide-down",
+        "slide-up",
+        "none"
+      ]
+    },
+    "closeOnBackdrop": {
+      "label": "Fermer en cliquant sur le fond",
+      "type": "checkbox",
+      "default": true
+    }
+  },
+  "content": {
+    "title": {
+      "label": "Titre",
+      "type": "text",
+      "default": "Titre de la modale"
+    },
+    "body": {
+      "label": "Contenu",
+      "type": "textarea",
+      "default": "Ceci est le contenu de la modale. Vous pouvez y placer du texte, des formulaires ou tout autre élément."
+    },
+    "closeText": {
+      "label": "Texte bouton fermer",
+      "type": "text",
+      "default": "Annuler"
+    },
+    "actionText": {
+      "label": "Texte bouton action",
+      "type": "text",
+      "default": "Confirmer"
+    },
+    "icon": {
+      "label": "Icône (optionnel)",
+      "type": "text",
+      "default": ""
+    }
+  }
+}
