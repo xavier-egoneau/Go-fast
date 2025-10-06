@@ -2,156 +2,183 @@
 
 Un starter kit moderne pour l'intégration HTML avec showcase de composants dynamique.
 
-## 📋 Table des matières
-
-1. [Prérequis](#prérequis)
-2. [Installation](#installation)
-3. [Utilisation](#utilisation)
-4. [Structure du projet](#structure-du-projet)
-5. [Créer un nouveau composant](#créer-un-nouveau-composant)
-6. [Tâches Gulp disponibles](#tâches-gulp-disponibles)
+**Framework showcase permanent** + **Projet remplaçable** = Développement rapide et organisé.
 
 ---
 
-## 🔧 Prérequis
+## 📋 Table des matières
 
-- **Node.js** (v16 ou supérieur)
-- **npm** (v8 ou supérieur)
-- **Gulp CLI** installé globalement : `npm install -g gulp-cli`
+- [🎯 Qu'est-ce que c'est ?](#-quest-ce-que-cest-)
+- [⚡ Installation](#-installation)
+- [🚀 Utilisation](#-utilisation)
+- [📁 Structure du projet](#-structure-du-projet)
+- [🎨 Créer un composant](#-créer-un-composant)
+- [📄 Créer une page](#-créer-une-page)
+- [🛠️ Tâches disponibles](#️-tâches-disponibles)
+- [🔄 Démarrer un nouveau projet](#-démarrer-un-nouveau-projet)
+- [📦 Build et déploiement](#-build-et-déploiement)
 
-## 🚀 Installation
+---
 
-1. **Cloner le projet**
+## 🎯 Qu'est-ce que c'est ?
+
+Un système complet pour créer des sites web avec :
+
+- ✅ **Design System** avec composants réutilisables
+- ✅ **Showcase interactif** pour visualiser et tester les composants
+- ✅ **Templates Twig** pour générer le HTML
+- ✅ **SCSS** pour les styles
+- ✅ **Gulp** pour l'automatisation
+- ✅ **Live reload** en développement
+
+### Architecture en 2 parties
+
+```
+app/        → Framework showcase (permanent - ne pas toucher)
+dev/        → Votre projet (remplaçable pour chaque nouveau projet)
+```
+
+---
+
+## ⚡ Installation
+
+### Prérequis
+
+- Node.js v16+
+- npm v8+
+
+### Installation
+
 ```bash
+# 1. Cloner le projet
 git clone [url-du-repo]
 cd starter-kit-design-system
-```
 
-2. **Installer les dépendances**
-```bash
+# 2. Installer les dépendances
 npm install
-```
 
-3. **Lancer le projet en mode développement**
-```bash
+# 3. Lancer en développement
 npm run dev
-# ou
-gulp dev
 ```
 
-Le projet sera accessible sur `http://localhost:3000`
+Le showcase s'ouvre sur `http://localhost:3000`
 
-## 📖 Utilisation
+---
 
-### Mode développement
+## 🚀 Utilisation
+
+### Commandes principales
 
 ```bash
-gulp dev
+npm run dev              # Développement avec live reload (projet uniquement)
+npm run build            # Build complet (app + projet)
+npm run build:app        # Build app showcase uniquement
+npm run build:project    # Build projet uniquement
+npm run clean            # Nettoyer le dossier public/
 ```
 
-Cette commande :
-- Génère la liste des composants et pages
-- Compile SCSS en CSS
-- Compile Twig en HTML
-- Copie les assets (scripts, images, fonts, icônes)
-- Lance un serveur local avec live reload
-- Surveille les modifications de fichiers
+### Workflow quotidien
 
-### Build de production
+1. **Développement** : `npm run dev` - Lance le serveur, surveille les modifications
+2. **Création** : Ajoutez composants et pages dans `dev/`
+3. **Prévisualisation** : Le showcase se met à jour automatiquement
+4. **Build** : `npm run build` avant de déployer
 
-```bash
-gulp
-```
-
-Compile tout le projet dans le dossier `public/`
+---
 
 ## 📁 Structure du projet
 
 ```
 starter-kit-design-system/
-├── dev/                          # Dossier de développement
-│   ├── assets/
-│   │   ├── scss/                 # Styles SCSS
-│   │   │   ├── base/            # Reset, variables, mixins, typography
-│   │   │   ├── components/      # Styles des composants
-│   │   │   ├── layout/          # Grid, container
-│   │   │   ├── showcase/        # Styles de la page showcase
-│   │   │   └── style.scss       # Point d'entrée
-│   │   ├── scripts/             # Scripts JavaScript
-│   │   │   └── showcase.js      # Script principal du showcase
-│   │   ├── images/              # Images
-│   │   ├── fonts/               # Polices
-│   │   └── icones/              # Icônes SVG
-│   ├── components/               # Composants Twig + JSON
+│
+├── app/                          # ⚙️ Framework showcase (NE PAS MODIFIER)
+│   ├── templates/                # Templates du showcase
+│   │   ├── index.twig           # Page d'accueil showcase
+│   │   └── page-showcase.twig   # Visualisation composants/pages
+│   ├── scripts/                  # Scripts du showcase
+│   │   ├── showcase.js          # Logique showcase
+│   │   ├── page-showcase.js     # Visualisation interactive
+│   │   └── quality-tests.js     # Tests qualité
+│   └── styles/                   # Styles du showcase
+│       └── showcase.scss        # Point d'entrée CSS showcase
+│
+├── dev/                          # 🎨 VOTRE PROJET (modifiable)
+│   ├── components/               # Vos composants
 │   │   ├── button/
-│   │   │   ├── button.twig      # Template du composant
-│   │   │   └── button.json      # Configuration du composant
+│   │   │   ├── button.twig      # Template
+│   │   │   ├── button.json      # Configuration
+│   │   │   └── button.md        # Documentation (optionnel)
 │   │   ├── card/
 │   │   └── input/
-│   ├── pages/                    # Pages Twig
-│   │   └── index.twig           # Page showcase
+│   │
+│   ├── pages/                    # Vos pages
+│   │   ├── landing.twig
+│   │   ├── landing.json
+│   │   └── portfolio.twig
+│   │
+│   ├── assets/
+│   │   ├── scss/
+│   │   │   ├── base/            # Reset, typography
+│   │   │   ├── components/      # Styles des composants
+│   │   │   ├── layout/          # Grid, container
+│   │   │   ├── pages/           # Styles des pages
+│   │   │   └── style.scss       # Point d'entrée CSS projet
+│   │   ├── images/
+│   │   ├── fonts/
+│   │   └── icones/
+│   │
 │   └── data/                     # Données générées
-│       └── showcase.json        # Liste des composants/pages (auto-généré)
-├── public/                       # Sortie compilée
-├── tasks/                        # Tâches Gulp
-│   ├── clean.js
-│   ├── css.js
-│   ├── html.js
-│   ├── scripts.js
-│   ├── assets.js
-│   ├── showcase.js
-│   └── watch.js
-├── gulpfile.js
-├── package.json
-└── README.md
+│       └── showcase.json        # Auto-généré
+│
+├── public/                       # 📦 Sortie compilée
+├── tasks/                        # ⚙️ Tâches Gulp
+└── gulpfile.js
 ```
 
-## ✨ Créer un nouveau composant
+### Séparation App / Projet
 
-### 1. Créer le dossier du composant
+| Dossier | Rôle | Fréquence de modification |
+|---------|------|--------------------------|
+| **app/** | Framework showcase permanent | Une fois (ou lors de mises à jour) |
+| **dev/** | Votre projet actuel | Quotidienne |
+
+---
+
+## 🎨 Créer un composant
+
+### 1. Créer le dossier
 
 ```bash
-mkdir -p dev/components/mon-composant
+mkdir -p dev/components/alert
 ```
 
-### 2. Créer le fichier JSON de configuration
+### 2. Créer le fichier JSON
 
-**`dev/components/mon-composant/mon-composant.json`**
+**`dev/components/alert/alert.json`**
 
 ```json
 {
-  "name": "Mon Composant",
-  "category": "Category",
-  "description": "Description du composant",
+  "name": "Alert",
+  "category": "Feedback",
+  "description": "Boîte d'alerte pour messages importants",
   "variants": {
-    "size": {
-      "label": "Taille",
+    "type": {
+      "label": "Type",
       "type": "select",
-      "default": "medium",
-      "options": ["small", "medium", "large"]
+      "default": "info",
+      "options": ["info", "success", "warning", "error"]
     },
-    "color": {
-      "label": "Couleur",
-      "type": "select",
-      "default": "blue",
-      "options": ["blue", "red", "green"]
-    },
-    "disabled": {
-      "label": "Désactivé",
+    "dismissible": {
+      "label": "Fermable",
       "type": "checkbox",
       "default": false
     }
   },
   "content": {
-    "text": {
-      "label": "Texte",
-      "type": "text",
-      "default": "Contenu par défaut"
-    },
-    "description": {
-      "label": "Description",
+    "message": {
+      "label": "Message",
       "type": "textarea",
-      "default": "Description longue..."
+      "default": "Ceci est un message important."
     }
   }
 }
@@ -159,174 +186,345 @@ mkdir -p dev/components/mon-composant
 
 ### 3. Créer le template Twig
 
-**`dev/components/mon-composant/mon-composant.twig`**
+**`dev/components/alert/alert.twig`**
 
 ```twig
-{# Mon Composant #}
-{% set size = size|default('medium') %}
-{% set color = color|default('blue') %}
-{% set disabled = disabled|default(false) %}
-{% set text = text|default('Default text') %}
+{% set type = type|default('info') %}
+{% set dismissible = dismissible|default(false) %}
+{% set message = message|default('Message') %}
 
-<div class="mon-composant mon-composant--{{ size }} mon-composant--{{ color }}"
-     {% if disabled %}aria-disabled="true"{% endif %}>
-  {{ text }}
+<div class="alert alert--{{ type }}">
+  <p class="alert__message">{{ message }}</p>
+  {% if dismissible %}
+  <button class="alert__close" aria-label="Fermer">×</button>
+  {% endif %}
 </div>
 ```
 
 ### 4. Créer les styles SCSS
 
-**`dev/assets/scss/components/_mon-composant.scss`**
+**`dev/assets/scss/components/_alert.scss`**
 
 ```scss
-.mon-composant {
+@use '../base/variables' as *;
+
+.alert {
   padding: $spacing-md;
-  border-radius: $radius-md;
-  
-  // Sizes
-  &--small { font-size: $font-size-sm; }
-  &--medium { font-size: $font-size-base; }
-  &--large { font-size: $font-size-lg; }
-  
-  // Colors
-  &--blue { background-color: $color-primary; }
-  &--red { background-color: $color-danger; }
-  &--green { background-color: $color-success; }
-  
-  // States
-  &[aria-disabled="true"] {
-    opacity: 0.5;
-    pointer-events: none;
+  border-radius: $radius-lg;
+  border-left: 4px solid;
+
+  &--info {
+    background: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+  }
+
+  &--success {
+    background: rgba($color-success, 0.1);
+    border-color: $color-success;
+  }
+
+  &--warning {
+    background: rgba($color-warning, 0.1);
+    border-color: $color-warning;
+  }
+
+  &--error {
+    background: rgba($color-danger, 0.1);
+    border-color: $color-danger;
+  }
+
+  &__message {
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
   }
 }
 ```
 
-### 5. Importer le style dans style.scss
+### 5. Le composant apparaît automatiquement !
+
+Sauvegardez → Votre composant est maintenant visible dans le showcase avec tous ses contrôles.
+
+---
+
+## 📄 Créer une page
+
+### 1. Créer le template
+
+**`dev/pages/about.twig`**
+
+```twig
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>À propos</h1>
+
+    {# Utiliser un composant #}
+    {% include 'components/card/card.twig' with {
+      title: 'Notre équipe',
+      content: 'Nous sommes une équipe passionnée...'
+    } %}
+  </div>
+</body>
+</html>
+```
+
+### 2. (Optionnel) Créer les données JSON
+
+**`dev/pages/about.json`**
+
+```json
+{
+  "name": "À propos",
+  "category": "pages",
+  "description": "Page de présentation de l'équipe"
+}
+```
+
+### 3. Créer les styles de page
+
+**`dev/assets/scss/pages/_about.scss`**
+
+```scss
+.about {
+  padding: 2rem 0;
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+}
+```
+
+### 4. Importer dans style.scss
 
 **`dev/assets/scss/style.scss`**
 
 ```scss
-// Ajouter cette ligne
-@import 'components/mon-composant';
+// Pages du projet
+@use 'pages/about';
 ```
 
-### 6. Le composant apparaîtra automatiquement
+La page est compilée dans `public/about.html`
 
-Sauvegardez vos fichiers et le composant apparaîtra automatiquement sur la page showcase avec tous ses contrôles !
+---
 
-## 🛠️ Tâches Gulp disponibles
+## 🛠️ Tâches disponibles
 
-### Tâches principales
+### Builds
 
-- `gulp` - Build complet du projet
-- `gulp dev` - Mode développement avec live reload
-- `gulp clean` - Supprime le dossier `public/`
+| Commande | Description |
+|----------|-------------|
+| `npm run build` | Build complet (app + projet) |
+| `npm run build:app` | Build app showcase uniquement |
+| `npm run build:project` | Build projet uniquement |
 
-### Tâches individuelles
+### Développement
 
-- `gulp make:css` - Compile SCSS → CSS
-- `gulp make:html` - Compile Twig → HTML
-- `gulp copy:js` - Copie les scripts JS
-- `gulp copy:images` - Copie les images
-- `gulp copy:fonts` - Copie les polices
-- `gulp copy:icons` - Copie les icônes
-- `gulp generate:showcase` - Génère le fichier showcase.json
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Mode développement (watch projet uniquement) |
+| `npm run clean` | Nettoyer le dossier public/ |
 
-### Voir toutes les tâches
+### Gulp (pour plus de contrôle)
 
 ```bash
-gulp --tasks
+gulp --tasks                    # Lister toutes les tâches
+gulp make:css                   # Compiler SCSS → CSS
+gulp make:html                  # Compiler Twig → HTML
+gulp generate:showcase          # Générer showcase.json
+gulp copy:images                # Copier images
+gulp copy:fonts                 # Copier fonts
+gulp copy:icons                 # Copier icônes
 ```
 
-## 📝 Configuration des composants (JSON)
+---
+
+## 🔄 Démarrer un nouveau projet
+
+Quand vous voulez commencer un nouveau projet :
+
+### Option 1 : Nettoyer manuellement
+
+```bash
+# Supprimer les composants exemples
+rm -rf dev/components/*
+
+# Supprimer les pages exemples
+rm -rf dev/pages/*
+
+# Garder uniquement la structure de base
+```
+
+### Option 2 : Archive propre
+
+1. Créer une archive du projet vierge
+2. Extraire l'archive pour chaque nouveau projet
+3. Le dossier `app/` reste intact (showcase)
+
+### Structure minimale à garder
+
+```
+dev/
+├── components/       # Vide (ou vos composants de base)
+├── pages/           # Vide
+└── assets/
+    └── scss/
+        ├── base/    # Variables, mixins (à adapter)
+        └── style.scss
+```
+
+---
+
+## 📦 Build et déploiement
+
+### Build de production
+
+```bash
+npm run build
+```
+
+Compile tout dans `public/` :
+
+```
+public/
+├── assets/
+│   ├── css/
+│   │   ├── showcase.css      # CSS du showcase
+│   │   └── style.css         # CSS du projet
+│   └── scripts/
+│       └── ...
+├── index.html                 # Page showcase
+├── page-showcase.html        # Visualisation
+├── landing.html              # Vos pages
+└── portfolio.html
+```
+
+### Déploiement
+
+1. **Build** : `npm run build`
+2. **Déployer** : Uploader le dossier `public/` sur votre serveur
+3. Le site est accessible !
+
+### Déployer sans le showcase (projet uniquement)
+
+Si vous ne voulez pas déployer le showcase :
+
+1. `npm run build:project`
+2. Supprimer `public/index.html` et `public/page-showcase.html`
+3. Déployer `public/`
+
+---
+
+## 🎓 Configuration JSON des composants
 
 ### Types de contrôles disponibles
 
-#### Select (liste déroulante)
+| Type | Description | Exemple |
+|------|-------------|---------|
+| `select` | Liste déroulante | `"options": ["small", "medium", "large"]` |
+| `checkbox` | Case à cocher | `"default": false` |
+| `text` | Champ texte | `"default": "Mon texte"` |
+| `textarea` | Zone de texte | `"default": "Long texte..."` |
+| `number` | Champ numérique | `"default": 5` |
+
+### Structure JSON complète
 
 ```json
-"variant": {
-  "label": "Variante",
-  "type": "select",
-  "default": "primary",
-  "options": ["primary", "secondary", "success"]
+{
+  "name": "Nom du composant",
+  "category": "Catégorie",
+  "description": "Description courte",
+  "variants": {
+    "nomVariante": {
+      "label": "Label affiché",
+      "type": "select|checkbox|text|textarea|number",
+      "default": "valeur par défaut",
+      "options": ["opt1", "opt2"]  // Pour select uniquement
+    }
+  },
+  "content": {
+    "nomContenu": {
+      "label": "Label affiché",
+      "type": "text|textarea|number",
+      "default": "valeur par défaut"
+    }
+  }
 }
 ```
 
-#### Checkbox (case à cocher)
+---
 
-```json
-"disabled": {
-  "label": "Désactivé",
-  "type": "checkbox",
-  "default": false
-}
-```
+## 🏆 Fonctionnalités
 
-#### Text (champ texte)
-
-```json
-"title": {
-  "label": "Titre",
-  "type": "text",
-  "default": "Mon titre"
-}
-```
-
-#### Number (champ numérique)
-
-```json
-"count": {
-  "label": "Nombre",
-  "type": "number",
-  "default": 5
-}
-```
-
-#### Textarea (champ texte multi-ligne)
-
-```json
-"description": {
-  "label": "Description",
-  "type": "textarea",
-  "default": "Description longue..."
-}
-```
-
-## 🎨 Variables SCSS disponibles
-
-Le projet inclut un système complet de design tokens :
-
-### Couleurs
-- `$color-primary`, `$color-success`, `$color-danger`, `$color-warning`, `$color-secondary`
-- `$color-gray-50` à `$color-gray-900`
-
-### Typographie
-- `$font-size-xs` à `$font-size-4xl`
-- `$font-weight-normal`, `medium`, `semibold`, `bold`
-
-### Espacements
-- `$spacing-xs` à `$spacing-3xl`
-
-### Border radius
-- `$radius-sm` à `$radius-2xl`, `$radius-full`
-
-### Ombres
-- `$shadow-sm`, `$shadow-md`, `$shadow-lg`, `$shadow-xl`
-
-## 🔥 Fonctionnalités
-
-✅ Showcase dynamique des composants
+✅ Showcase interactif des composants
 ✅ Configuration JSON intuitive
-✅ Prévisualisation en temps réel
-✅ Contrôles interactifs pour chaque variante
-✅ Génération automatique de code HTML/Twig
+✅ Prévisualisation temps réel
+✅ Contrôles interactifs
+✅ Génération code HTML/Twig
 ✅ Copie du code en un clic
 ✅ Live reload en développement
-✅ Design System complet avec variables SCSS
+✅ Design System avec variables SCSS
 ✅ Système de grille responsive
-✅ Composants pré-construits (Button, Card, Input)
+✅ Composants pré-construits (Button, Card, Input, Badge, Modal)
+✅ Builds séparés (app / projet)
+✅ Tests qualité W3C & RGAA intégrés
+
+---
+
+## 💡 Conseils et bonnes pratiques
+
+### Conventions de nommage
+
+- **Classes CSS** : BEM (`component__element--modifier`)
+- **Fichiers** : kebab-case (`mon-composant.twig`)
+- **Variables Twig** : snake_case (`ma_variable`)
+
+### Architecture des composants
+
+- Toujours définir des valeurs par défaut dans Twig
+- Utiliser les variables du design system (dans `dev/assets/scss/base/`)
+- Rendre les composants accessibles (ARIA, sémantique)
+- Un composant = 1 responsabilité
+
+### Utiliser les composants dans les pages
+
+```twig
+{# Méthode 1 : Include simple #}
+{% include 'components/button/button.twig' %}
+
+{# Méthode 2 : Avec variables #}
+{% include 'components/button/button.twig' with {
+  text: 'Mon bouton',
+  variant: 'primary',
+  size: 'large'
+} %}
+```
+
+---
+
+## 📞 Support
+
+Pour toute question, consultez cette documentation ou examinez les composants existants dans `dev/components/`.
+
+---
 
 ## 📄 License
 
 ISC
+
+---
+
+**Fait avec ❤️ pour simplifier l'intégration HTML**

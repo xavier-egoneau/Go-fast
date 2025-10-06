@@ -5,9 +5,11 @@
   "description": "Starter kit d'intégration HTML avec showcase de composants dynamique",
   "main": "gulpfile.js",
   "scripts": {
-    "postinstall": "node scripts/welcome.js || true",
+    "postinstall": "node app/scripts/welcome.js || true",
     "dev": "gulp dev",
     "build": "gulp",
+    "build:app": "gulp build:app",
+    "build:project": "gulp build:project",
     "mcp": "node mcp-server.js",
     "clean": "gulp clean"
   },

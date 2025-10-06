@@ -5,7 +5,7 @@ import beautify from 'gulp-jsbeautifier';
 
 // Compiler les fichiers Twig de l'application showcase
 function compileAppFiles() {
-  return src('dev/app/**/*.twig')
+  return src('app/templates/**/*.twig')
     .pipe(plumber())
     .pipe(twig({
       data: {} // Pas de données spécifiques nécessaires pour les fichiers app

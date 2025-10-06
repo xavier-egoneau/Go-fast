@@ -5,10 +5,8 @@ const bs = browserSync.create();
 // Import des autres tâches
 import compileScss from './css.js';
 import compileTwig from './html.js';
-import copyScripts from './scripts.js';
 import { copyImages, copyFonts, copyIcons } from './assets.js';
 import generateShowcaseData from './showcase.js';
-import compileAppFiles from './app.js';
 
 // Démarre le serveur BrowserSync
 function serve(done) {
@@ -45,12 +43,6 @@ function watchFiles() {
   watch('dev/components/**/*.json',
     series(generateShowcaseData, compileTwig, reload));
 
-  // Fichiers de l'app (index.twig, page-showcase.twig)
-  watch('dev/app/**/*.twig', series(compileAppFiles, reload));
-
-  // Scripts
-  watch('dev/assets/scripts/**/*.js', series(copyScripts, reload));
-
   // Images
   watch('dev/assets/images/**/*', series(copyImages, reload));
 
@@ -58,10 +50,10 @@ function watchFiles() {
   watch('dev/assets/icones/**/*', series(copyIcons, reload));
 }
 
-// Tâche de développement
+// Tâche de développement (projet uniquement)
 const dev = series(
   generateShowcaseData,
-  parallel(compileScss, compileTwig, copyScripts, copyImages, copyFonts, copyIcons),
+  parallel(compileScss, compileTwig, copyImages, copyFonts, copyIcons),
   serve,
   watchFiles
 );

@@ -1,0 +1,21 @@
+// Showcase App Styles
+// Point d'entrée pour les styles de l'application showcase
+
+// Import des dépendances du design system
+@use '../../dev/assets/scss/base/variables' as *;
+@use '../../dev/assets/scss/base/mixins' as *;
+@use '../../dev/assets/scss/base/reset';
+@use '../../dev/assets/scss/base/typography';
+
+// Layout
+@use '../../dev/assets/scss/layout/grid';
+@use '../../dev/assets/scss/layout/container';
+
+// Import des composants du design system utilisés par le showcase
+@use '../../dev/assets/scss/components/button';
+@use '../../dev/assets/scss/components/badge';
+@use '../../dev/assets/scss/components/card';
+@use '../../dev/assets/scss/components/modal';
+
+// Import des styles spécifiques au showcase
+@use 'showcase/showcase';

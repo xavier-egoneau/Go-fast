@@ -1,6 +1,6 @@
 // Showcase styles
-@use '../base/variables' as *;
-@use '../base/mixins' as *;
+@use '../../../dev/assets/scss/base/variables' as *;
+@use '../../../dev/assets/scss/base/mixins' as *;
 
 .showcase {
   min-height: 100vh;

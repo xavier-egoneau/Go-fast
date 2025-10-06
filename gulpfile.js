@@ -8,11 +8,16 @@
 // ----------------------------------------------------------------------------
 
 // Import des taches du repertoire tasks
+import { task, parallel } from 'gulp';
 import clean from './tasks/clean.js';
-import css from './tasks/css.js';
-import html from './tasks/html.js';
-import scripts from './tasks/scripts.js';
-import watch from './tasks/watch.js';
-import assets from './tasks/assets.js';
-import showcase from './tasks/showcase.js';
-import app from './tasks/app.js';
+import buildApp from './tasks/build-app.js';
+import buildProject from './tasks/build-project.js';
+import { dev } from './tasks/watch.js';
+
+// Tâche de build complète (app + projet)
+const build = parallel(buildApp, buildProject);
+
+// Tâche par défaut
+task('default', build);
+
+export default build;

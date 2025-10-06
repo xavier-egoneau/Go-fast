@@ -3,7 +3,7 @@ import plumber from 'gulp-plumber';
 
 // Copie les scripts JS et JSON
 function copyScripts() {
-  return src('dev/assets/scripts/**/*.{js,json}')
+  return src('app/scripts/**/*.{js,json}')
     .pipe(plumber())
     .pipe(dest('public/assets/scripts'));
 }
