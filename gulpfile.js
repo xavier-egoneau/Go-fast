@@ -13,6 +13,7 @@ import clean from './tasks/clean.js';
 import buildApp from './tasks/build-app.js';
 import buildProject from './tasks/build-project.js';
 import { dev } from './tasks/watch.js';
+import processSVG from './tasks/svg.js';
 
 // Tâche de build complète (app + projet)
 const build = parallel(buildApp, buildProject);
