@@ -1,0 +1,59 @@
+/**
+ * Tailwind CSS v4 - Alternative au SCSS custom
+ * Point d'entrée pour utiliser Tailwind dans le projet
+ */
+
+@import "tailwindcss";
+
+/**
+ * Configuration des couleurs personnalisées
+ */
+@theme {
+  /* Couleurs primaires */
+  --color-primary: #0066cc;
+  --color-primary-light: #3399ff;
+  --color-primary-dark: #004d99;
+
+  --color-secondary: #6c757d;
+  --color-secondary-light: #adb5bd;
+  --color-secondary-dark: #495057;
+
+  --color-success: #28a745;
+  --color-success-light: #5cb85c;
+  --color-success-dark: #1e7e34;
+
+  --color-danger: #dc3545;
+  --color-danger-light: #e57373;
+  --color-danger-dark: #c62828;
+
+  --color-warning: #ffc107;
+  --color-warning-light: #ffd54f;
+  --color-warning-dark: #f57f17;
+
+  --color-info: #17a2b8;
+  --color-info-light: #4dd0e1;
+  --color-info-dark: #0097a7;
+
+  /* Couleurs grises */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+}
+
+/**
+ * Custom utilities
+ */
+@utility text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@utility transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

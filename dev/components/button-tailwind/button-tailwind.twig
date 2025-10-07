@@ -1,0 +1,53 @@
+{#
+/**
+ * Composant Button avec Tailwind CSS
+ *
+ * @param {string} text - Texte du bouton
+ * @param {string} variant - Variante du bouton (primary|secondary|outline|danger)
+ * @param {string} size - Taille du bouton (sm|md|lg)
+ * @param {string} type - Type de bouton (button|submit|reset)
+ * @param {boolean} disabled - Bouton désactivé
+ * @param {string} classes - Classes CSS additionnelles
+ */
+#}
+
+{% set text = text|default('Primary Button') %}
+{% set variant = variant|default('primary') %}
+{% set size = size|default('md') %}
+{% set type = type|default('button') %}
+{% set disabled = disabled|default(false) %}
+{% set classes = classes|default('') %}
+
+{# Classes de base #}
+{% set baseClasses = 'inline-flex items-center justify-center font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed' %}
+
+{# Classes de variantes #}
+{% set variantClasses = {
+  'primary': 'bg-[#0066cc] text-white hover:bg-[#004d99] focus:ring-[#0066cc] focus:ring-opacity-50',
+  'secondary': 'bg-[#6c757d] text-white hover:bg-[#495057] focus:ring-[#6c757d] focus:ring-opacity-50',
+  'outline': 'border-2 border-[#0066cc] text-[#0066cc] hover:bg-[#0066cc] hover:text-white focus:ring-[#0066cc] focus:ring-opacity-50',
+  'danger': 'bg-[#dc3545] text-white hover:bg-[#c62828] focus:ring-[#dc3545] focus:ring-opacity-50'
+} %}
+
+{# Classes de tailles #}
+{% set sizeClasses = {
+  'sm': 'px-3 py-1.5 text-sm rounded-md',
+  'md': 'px-4 py-2 text-base rounded-md',
+  'lg': 'px-6 py-3 text-lg rounded-lg'
+} %}
+
+{# Composition des classes #}
+{% set buttonClasses = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  classes|default('')
+]|join(' ') %}
+
+<button
+  type="{{ type }}"
+  class="{{ buttonClasses }}"
+  {% if disabled %}disabled{% endif %}
+>
+  {{ text }}
+</button>

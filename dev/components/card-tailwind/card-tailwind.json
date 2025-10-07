@@ -1,0 +1,34 @@
+{
+  "name": "Card Tailwind",
+  "category": "tailwind",
+  "description": "Carte avec Tailwind CSS - Design moderne avec hover effects",
+  "variants": {
+    "shadow": {
+      "label": "Afficher l'ombre",
+      "type": "checkbox",
+      "default": true
+    }
+  },
+  "content": {
+    "title": {
+      "label": "Titre",
+      "type": "text",
+      "default": "Beautiful Landscape"
+    },
+    "description": {
+      "label": "Description",
+      "type": "textarea",
+      "default": "Découvrez cette magnifique carte avec une image et un effet de zoom au survol."
+    },
+    "image": {
+      "label": "URL de l'image",
+      "type": "text",
+      "default": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+    },
+    "badge": {
+      "label": "Badge",
+      "type": "text",
+      "default": "Featured"
+    }
+  }
+}

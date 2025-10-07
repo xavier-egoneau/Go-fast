@@ -55,15 +55,15 @@ function compilePages() {
 // Compile les composants individuels en HTML
 function compileComponents() {
   const componentsDir = 'dev/components';
-  
+
   if (!fs.existsSync(componentsDir)) {
     return Promise.resolve();
   }
-  
+
   return src('dev/components/**/*.twig')
     .pipe(plumber())
     .pipe(twig({
-      data: {} // Les composants utilisent leurs propres données par défaut
+      data: {} // Les composants utilisent leurs propres données par défaut définies dans le Twig
     }))
     .pipe(beautify({
       indent_size: 2,

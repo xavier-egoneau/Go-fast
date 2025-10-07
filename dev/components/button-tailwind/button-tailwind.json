@@ -1,0 +1,31 @@
+{
+  "name": "Button Tailwind",
+  "category": "tailwind",
+  "description": "Bouton avec Tailwind CSS - Exemple d'utilisation de classes utilitaires",
+  "variants": {
+    "variant": {
+      "label": "Variante",
+      "type": "select",
+      "default": "primary",
+      "options": ["primary", "secondary", "outline", "danger"]
+    },
+    "size": {
+      "label": "Taille",
+      "type": "select",
+      "default": "md",
+      "options": ["sm", "md", "lg"]
+    },
+    "disabled": {
+      "label": "Désactivé",
+      "type": "checkbox",
+      "default": false
+    }
+  },
+  "content": {
+    "text": {
+      "label": "Texte du bouton",
+      "type": "text",
+      "default": "Primary Button"
+    }
+  }
+}

@@ -27,7 +27,7 @@ Un système complet pour créer des sites web avec :
 - ✅ **Design System** avec composants réutilisables
 - ✅ **Showcase interactif** pour visualiser et tester les composants
 - ✅ **Templates Twig** pour générer le HTML
-- ✅ **SCSS** pour les styles
+- ✅ **SCSS ou Tailwind CSS** pour les styles (au choix)
 - ✅ **Gulp** pour l'automatisation
 - ✅ **Live reload** en développement
 
@@ -70,10 +70,12 @@ Le showcase s'ouvre sur `http://localhost:3000`
 ### Commandes principales
 
 ```bash
-npm run dev              # Développement avec live reload (projet uniquement)
+npm run dev              # Développement avec live reload (SCSS classique)
+npm run dev:tailwind     # Développement avec Tailwind CSS
 npm run build            # Build complet (app + projet)
 npm run build:app        # Build app showcase uniquement
-npm run build:project    # Build projet uniquement
+npm run build:project    # Build projet uniquement (SCSS)
+npm run build:project:tailwind  # Build projet avec Tailwind
 npm run clean            # Nettoyer le dossier public/
 ```
 
@@ -122,7 +124,8 @@ starter-kit-design-system/
 │   │   │   ├── components/      # Styles des composants
 │   │   │   ├── layout/          # Grid, container
 │   │   │   ├── pages/           # Styles des pages
-│   │   │   └── style.scss       # Point d'entrée CSS projet
+│   │   │   ├── style.scss       # Point d'entrée SCSS classique
+│   │   │   └── tailwind.scss    # Point d'entrée Tailwind (optionnel)
 │   │   ├── images/
 │   │   ├── fonts/
 │   │   └── icones/
@@ -342,13 +345,32 @@ La page est compilée dans `public/about.html`
 
 ```bash
 gulp --tasks                    # Lister toutes les tâches
-gulp make:css                   # Compiler SCSS → CSS
+gulp make:css                   # Compiler SCSS → CSS (classique)
+gulp make:css:tailwind          # Compiler Tailwind → CSS
 gulp make:html                  # Compiler Twig → HTML
 gulp generate:showcase          # Générer showcase.json
 gulp copy:images                # Copier images
 gulp copy:fonts                 # Copier fonts
 gulp copy:icons                 # Copier icônes
 ```
+
+### Mode SCSS ou Tailwind CSS ?
+
+Le projet offre deux approches pour le CSS :
+
+#### **SCSS Classique** (par défaut)
+- Utilise `dev/assets/scss/style.scss`
+- Design system avec variables, mixins, fonctions
+- Architecture modulaire (base, layout, components, pages)
+- Commandes : `npm run dev` et `npm run build:project`
+
+#### **Tailwind CSS** (optionnel)
+- Utilise `dev/assets/scss/tailwind.scss`
+- Classes utilitaires (px-4, bg-primary, etc.)
+- Configuration dans `tailwind.config.js`
+- Commandes : `npm run dev:tailwind` et `npm run build:project:tailwind`
+
+**Vous pouvez choisir l'un ou l'autre selon vos préférences !**
 
 ---
 

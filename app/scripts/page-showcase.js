@@ -334,13 +334,15 @@ class UnifiedShowcase {
 
   generateComponentHTML(componentHTML) {
     // Créer une page HTML avec le composant déjà chargé
+    // Utiliser tailwind.css si le composant est dans la catégorie "tailwind"
+    const cssFile = this.currentItem.category === 'tailwind' ? 'tailwind.css' : 'style.css';
     return `<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${this.currentItem.name}</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/${cssFile}">
   <style>
     body {
       height: 100vh;
@@ -386,6 +388,29 @@ class UnifiedShowcase {
       const titleEl = element.querySelector('.card__title');
       let subtitleEl = element.querySelector('.card__subtitle');
       const bodyEl = element.querySelector('.card__body');
+      `;
+    } else if (componentId === 'button-tailwind') {
+      script += `
+      // Pour button-tailwind, on doit reconstruire les classes complètes
+      const variantClasses = {
+        'primary': 'bg-[#0066cc] text-white hover:bg-[#004d99] focus:ring-[#0066cc] focus:ring-opacity-50',
+        'secondary': 'bg-[#6c757d] text-white hover:bg-[#495057] focus:ring-[#6c757d] focus:ring-opacity-50',
+        'outline': 'border-2 border-[#0066cc] text-[#0066cc] hover:bg-[#0066cc] hover:text-white focus:ring-[#0066cc] focus:ring-opacity-50',
+        'danger': 'bg-[#dc3545] text-white hover:bg-[#c62828] focus:ring-[#dc3545] focus:ring-opacity-50'
+      };
+      const sizeClasses = {
+        'sm': 'px-3 py-1.5 text-sm rounded-md',
+        'md': 'px-4 py-2 text-base rounded-md',
+        'lg': 'px-6 py-3 text-lg rounded-lg'
+      };
+      const baseClasses = 'inline-flex items-center justify-center font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      `;
+    } else if (componentId === 'card-tailwind') {
+      script += `
+      const titleEl = element.querySelector('h3');
+      const descriptionEl = element.querySelector('p');
+      const imgEl = element.querySelector('img');
+      const badgeEl = element.querySelector('span');
       `;
     } else if (componentId === 'navbar') {
       script += `
@@ -540,8 +565,15 @@ class UnifiedShowcase {
             }
           }
         } else if (config.type === 'select') {
-          // Cas spécial pour input component
-          if (componentId === 'input') {
+          // Cas spécial pour button-tailwind
+          if (componentId === 'button-tailwind') {
+            const variantValue = key === 'variant' ? value : state.variants.variant;
+            const sizeValue = key === 'size' ? value : state.variants.size;
+            script += `
+            // Reconstruire les classes du bouton Tailwind
+            element.className = baseClasses + ' ' + variantClasses['${variantValue}'] + ' ' + sizeClasses['${sizeValue}'];
+            `;
+          } else if (componentId === 'input') {
             if (key === 'type') {
               script += `
               if (inputEl) {
@@ -653,6 +685,24 @@ class UnifiedShowcase {
           } else if (key === 'body') {
             script += `
             if (bodyEl) bodyEl.textContent = '${this.escapeString(value)}';
+            `;
+          }
+        } else if (componentId === 'card-tailwind') {
+          if (key === 'title') {
+            script += `
+            if (titleEl) titleEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'description') {
+            script += `
+            if (descriptionEl) descriptionEl.textContent = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'image') {
+            script += `
+            if (imgEl) imgEl.src = '${this.escapeString(value)}';
+            `;
+          } else if (key === 'badge') {
+            script += `
+            if (badgeEl) badgeEl.textContent = '${this.escapeString(value)}';
             `;
           }
         } else if (componentId === 'navbar') {
