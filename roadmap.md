@@ -1,1 +1,0 @@
-- [x] par default quand on arrive sur un composant/page il faudrait être sur le mode desktop
